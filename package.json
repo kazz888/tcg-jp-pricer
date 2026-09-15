@@ -1,0 +1,34 @@
+{
+  "name": "tcg-jp-pricer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "tsc --noEmit -p tsconfig.json",
+    "test": "node --disable-warning=ExperimentalWarning --test src/components/verdict.test.ts scripts/lib/join.test.mjs scripts/lib/printing-match.test.mjs scripts/lib/sealed.test.mjs",
+    "pull:yuyutei": "node scripts/pull-yuyutei.mjs",
+    "pull:cardmarket": "node scripts/pull-cardmarket.mjs",
+    "pull:sealed": "node scripts/pull-sealed.mjs",
+    "build:index": "node scripts/build-index.mjs",
+    "pipeline": "pnpm pull:yuyutei && pnpm pull:cardmarket --live && pnpm pull:sealed && pnpm build:index",
+    "pipeline:dry": "pnpm pull:yuyutei && pnpm pull:sealed && pnpm build:index"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.0",
+    "astro": "^5.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "cheerio": "^1.0.0",
+    "typescript": "^5.7.0"
+  }
+}

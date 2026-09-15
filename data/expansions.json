@@ -1,0 +1,697 @@
+{
+  "game": "one-piece",
+  "source": "Cardmarket expansion dropdown, Wayback capture 20260104083654 of /en/OnePiece/Products/Singles",
+  "snapshotDate": "2026-01-04",
+  "note": "Three-valued. ONLY language==\"japanese\" is priced. \"unknown\" means we have NO positive language evidence - it is NOT english. Override in expansion-overrides.json.",
+  "stats": {
+    "japanese": 44,
+    "english_confirmed": 43,
+    "unknown": 27
+  },
+  "expansions": [
+    {
+      "expansionId": 5229,
+      "name": "Romance Dawn",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5230,
+      "name": "Promos",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5237,
+      "name": "Starter Deck: Straw Hat Crew",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5238,
+      "name": "Starter Deck: Worst Generation",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5239,
+      "name": "Starter Deck: The Seven Warlords of the Sea",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5240,
+      "name": "Starter Deck: Animal Kingdom Pirates",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5244,
+      "name": "One Piece Products",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5255,
+      "name": "Starter Deck: ONE PIECE FILM edition",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5262,
+      "name": "Special Tournament Promos",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5263,
+      "name": "Paramount War",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5265,
+      "name": "Starter Deck: Absolute Justice",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5267,
+      "name": "Premium Bandai Products",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5300,
+      "name": "Promos: Paramount War",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5302,
+      "name": "Reprints",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5303,
+      "name": "Unnumbered Promos",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5312,
+      "name": "Judge Promos",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5364,
+      "name": "Pillars of Strength",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5365,
+      "name": "Kingdoms of Intrigue",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5366,
+      "name": "Starter Deck: Monkey.D.Luffy",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5367,
+      "name": "Starter Deck: Yamato",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5377,
+      "name": "Starter Deck: Big Mom Pirates",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5380,
+      "name": "Ultra Deck: The Three Captains",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5413,
+      "name": "Promos: Pillars of Strength",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5426,
+      "name": "Awakening of the New Era",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5427,
+      "name": "Starter Deck: Uta",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5481,
+      "name": "Awakening of the New Era (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5482,
+      "name": "Pillars of Strength (Japanese)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5483,
+      "name": "Paramount War (Japanese)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5484,
+      "name": "Romance Dawn (Japanese)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5485,
+      "name": "Kingdoms of Intrigue (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5486,
+      "name": "Promos: Kingdoms of Intrigue",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5510,
+      "name": "Unnumbered Promos (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5511,
+      "name": "Promos (Japanese)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5524,
+      "name": "Wings of the Captain",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5551,
+      "name": "Wings of the Captain (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5558,
+      "name": "Ultimate Deck - The Three Captains (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5565,
+      "name": "Promos: Awakening of the New Era",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5580,
+      "name": "Memorial Collection (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5585,
+      "name": "Memorial Collection",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5586,
+      "name": "500 Years into the Future",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5587,
+      "name": "500 Years into the Future (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5591,
+      "name": "Starter Deck: Uta (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5592,
+      "name": "Starter Deck: Zoro & Sanji (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5593,
+      "name": "Starter Deck: Zoro & Sanji",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5594,
+      "name": "Ultimate Deck: The Three Brothers (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5595,
+      "name": "Ultra Deck: The Three Brothers",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5598,
+      "name": "Special Tournament Promos (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5610,
+      "name": "Two Legends",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5611,
+      "name": "Starter Deck: 3D2Y",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5622,
+      "name": "Promos: Wings of the Captain",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5624,
+      "name": "Romance Dawn (Pre-Errata)",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5744,
+      "name": "Two Legends (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5747,
+      "name": "Starter Deck: Edward.Newgate",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5748,
+      "name": "Starter Deck: Green Uta",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5749,
+      "name": "Starter Deck: Donquixote Doflamingo",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5750,
+      "name": "Starter Deck: Purple Monkey.D.Luffy",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5751,
+      "name": "Starter Deck: Smoker",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5752,
+      "name": "Starter Deck: Charlotte Katakuri",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5755,
+      "name": "Emperors in the New World",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5803,
+      "name": "Promos: 500 Years into the Future",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5804,
+      "name": "The Best (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5805,
+      "name": "The Best",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5850,
+      "name": "Starter Deck: 3D2Y (Japanese)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5887,
+      "name": "Emperors in the New World (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5896,
+      "name": "Promos: Two Legends",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5968,
+      "name": "Starter Deck: Edward.Newgate (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5969,
+      "name": "Starter Deck: Green Uta (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5970,
+      "name": "Starter Deck: Donquixote Doflamingo (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5971,
+      "name": "Starter Deck: Purple Monkey.D.Luffy (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5972,
+      "name": "Starter Deck: Smoker (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5973,
+      "name": "Starter Deck: Charlotte Katakuri (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5974,
+      "name": "Royal Blood",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5975,
+      "name": "Royal Blood (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 5979,
+      "name": "Promos: Emperors in the New World",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 5998,
+      "name": "Starter Deck: EX Gear 5",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 5999,
+      "name": "Starter Deck: EX Gear 5 (Non English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6018,
+      "name": "Anime 25th Collection (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6028,
+      "name": "Anime 25th Collection",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6029,
+      "name": "Starter Deck: Straw Hat Crew (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6030,
+      "name": "Starter Deck: Worst Generation (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6031,
+      "name": "Starter Deck: The Seven Warlords of the Sea (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6032,
+      "name": "Starter Deck: Animal Kingdom Pirates (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6033,
+      "name": "A Fist of Divine Speed",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6034,
+      "name": "A Fist of Divine Speed (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6090,
+      "name": "Promos: Royal Blood",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 6138,
+      "name": "Starter Deck: EX Ace & Newgate (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6147,
+      "name": "Starter Deck: Green Yellow Yamato",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6148,
+      "name": "Starter Deck: Black Marshall.D.Teach",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6149,
+      "name": "Starter Deck: Purple Black Monkey.D.Luffy",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6150,
+      "name": "Starter Deck: Blue Buggy",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6151,
+      "name": "Starter Deck: Green Jewelry Bonney",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6152,
+      "name": "Starter Deck: Red Shanks",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6157,
+      "name": "Legacy of the Master (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6160,
+      "name": "Promos: A Fist of Divine Speed",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 6186,
+      "name": "Legacy of the Master",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6187,
+      "name": "Carrying on his Will",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6215,
+      "name": "Starter Deck: Yamato (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6224,
+      "name": "Starter Deck: Green Yellow Yamato (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6225,
+      "name": "Starter Deck: Black Marshall.D.Teach (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6226,
+      "name": "Starter Deck: Purple Black Monkey.D.Luffy (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6227,
+      "name": "Starter Deck: Blue Buggy (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6228,
+      "name": "Starter Deck: Green Jewelry Bonney (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6229,
+      "name": "Starter Deck: Red Shanks (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6233,
+      "name": "The Best Vol. 2 (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6242,
+      "name": "The Best Vol.2",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 6264,
+      "name": "Promos: Legacy of the Master",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 6270,
+      "name": "Starter Deck: EX Ace & Newgate",
+      "language": "english_confirmed",
+      "basis": "has_japanese_twin"
+    },
+    {
+      "expansionId": 6277,
+      "name": "Carrying on his Will (Non-English)",
+      "language": "japanese",
+      "basis": "name_suffix"
+    },
+    {
+      "expansionId": 6338,
+      "name": "Learn Together Deck Set 01",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 6372,
+      "name": "Promos: Carrying on his Will",
+      "language": "unknown",
+      "basis": "no_japanese_twin"
+    },
+    {
+      "expansionId": 6379,
+      "name": "Heroines Edition (Asia Region Legal)",
+      "language": "unknown",
+      "basis": "asia_region_unresolved"
+    },
+    {
+      "expansionId": 6411,
+      "name": "The Azure Sea's Seven (Asia Region Legal)",
+      "language": "unknown",
+      "basis": "asia_region_unresolved"
+    },
+    {
+      "expansionId": 6457,
+      "name": "The Time of Battle (slug OP16)",
+      "language": "unknown",
+      "basis": "UNRESOLVED"
+    },
+    {
+      "expansionId": 6606,
+      "name": "The Time of Battle (Asia Region Legal) (inferred)",
+      "language": "unknown",
+      "basis": "UNRESOLVED"
+    }
+  ]
+}

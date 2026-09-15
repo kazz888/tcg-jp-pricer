@@ -1,0 +1,21 @@
+{
+  "note": "Human-verified overrides. These WIN over data/expansions.json. See docs/MAPPING.md.",
+  "verifiedBy": "kasper",
+  "verifiedOn": "2026-09-15",
+  "basis": "User attests that Cardmarket's '(Asia Region Legal)' One Piece categories are in practice Japanese-language cards ('I almost never see any other language than Japanese in those categories'). Expansion ids resolved by cross-referencing Apify productId->expansionId against cardmarketapi /search productId->expansionName.",
+  "overrides": {
+    "6411": { "language": "japanese", "name": "The Azure Sea's Seven (Asia Region Legal)", "set": "OP14", "why": "ARL = Japanese per user attestation; name confirmed in Jan snapshot" },
+    "6504": { "language": "japanese", "name": "Adventure on Kami's Island (Asia Region Legal)", "set": "OP15", "why": "ARL suffix confirmed live via cardmarketapi search on OP15-118" },
+    "6606": { "language": "japanese", "name": "The Time of Battle (Asia Region Legal)", "set": "OP16", "why": "ARL suffix confirmed in Jan snapshot" },
+    "6723": { "language": "japanese", "name": "The World's Strongest Warriors (Asia Region Legal)", "set": "OP17", "why": "cardmarketapi still shows the raw placeholder name 'OP17'; user sees 'The World's Strongest Warriors (Asia Region Legal)' live, and 6492 is the unsuffixed English twin, so 6723 is the ARL printing. LOWEST CONFIDENCE OF THE FOUR." },
+    "6379": { "language": "japanese", "name": "Heroines Edition (Asia Region Legal)", "why": "ARL = Japanese per user attestation" },
+
+    "6432": { "language": "english_confirmed", "name": "The Azure Sea's Seven", "set": "OP14", "why": "unsuffixed twin of 6411" },
+    "6456": { "language": "english_confirmed", "name": "Adventure on Kami's Island", "set": "OP15", "why": "unsuffixed twin of 6504, confirmed live" },
+    "6457": { "language": "english_confirmed", "name": "The Time of Battle", "set": "OP16", "why": "unsuffixed twin of 6606" },
+    "6492": { "language": "english_confirmed", "name": "The World's Strongest Warriors", "set": "OP17", "why": "unsuffixed twin of 6723, confirmed live" }
+  },
+  "openQuestions": [
+    "Each of OP14-OP17 has a THIRD expansion of ~75 cards (6446, 6552, 6609, 6707) whose language is unresolved. Left as 'unknown' so they fail closed. If these are the Japanese parallel/alt-art subsets, we are currently missing chase-card EUR prices for the newest sets."
+  ]
+}

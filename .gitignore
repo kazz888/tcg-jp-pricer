@@ -1,0 +1,20 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+.astro/
+.wrangler/
+
+# Pipeline scratch (raw HTML dumps, partial fetches)
+.cache/
+tmp/
+
+# OS
+.DS_Store

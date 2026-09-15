@@ -1,0 +1,96 @@
+---
+// The whole app is one page. The price index is read from disk at BUILD time
+// and baked into the document, because the user opens this in a basement in
+// Osaka with no signal. There is no runtime fetch anywhere in this app.
+//
+// PRICER_INDEX=<path> swaps in a development fixture; the payload is then
+// flagged so the UI can shout that the numbers are fake.
+
+import { existsSync, readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { isAbsolute, resolve } from 'node:path'
+import App from '../components/App'
+import { sanitizeIndex, EMPTY_INDEX } from '../components/model'
+import '../styles/app.css'
+
+const projectRoot = fileURLToPath(new URL('../../', import.meta.url))
+const fixtureArg = process.env.PRICER_INDEX ?? ''
+const indexPath = fixtureArg
+  ? (isAbsolute(fixtureArg) ? fixtureArg : resolve(projectRoot, fixtureArg))
+  : resolve(projectRoot, 'data/index.json')
+
+let loadError: string | null = null
+let parsed: unknown = null
+
+if (existsSync(indexPath)) {
+  try {
+    parsed = JSON.parse(readFileSync(indexPath, 'utf8'))
+  } catch (err) {
+    loadError = `Could not parse ${indexPath}: ${(err as Error).message}`
+  }
+} else {
+  loadError = `No price index at ${indexPath} - run the pipeline.`
+}
+
+const index = parsed ? sanitizeIndex(parsed) : null
+if (parsed && !index) {
+  loadError = `${indexPath} does not look like a PriceIndex (no cards array).`
+}
+
+const payload = {
+  index: index ?? EMPTY_INDEX,
+  // Only claim "fixture" when one actually loaded; a fixture path that does not
+  // resolve is just an empty build, and should say so.
+  fixture: Boolean(fixtureArg) && index !== null,
+  loadError,
+}
+
+// Inline JSON must never be able to close its own script tag.
+const payloadJson = JSON.stringify(payload).replace(/</g, '\\u003c')
+
+const cardCount = payload.index.cards.length
+console.log(`[ui] baked ${cardCount} cards from ${indexPath}${fixtureArg ? ' (FIXTURE)' : ''}`)
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>One Piece shop price check</title>
+    <meta name="description" content="Offline yen price check for Japanese One Piece cards, at the shop counter." />
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="TCG JP" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='32' y='44' font-size='34' font-family='system-ui,sans-serif' font-weight='bold' fill='%233ddc84' text-anchor='middle'%3E%C2%A5%3C/text%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <script id="price-index" type="application/json" is:inline set:html={payloadJson}></script>
+
+    <App client:only="react" />
+
+    <noscript>
+      <div style="padding:24px;color:#fff;background:#000;font:16px system-ui">
+        <strong>JavaScript is required.</strong> All prices are baked into this page and compared on the device; there
+        is no server to fall back to.
+      </div>
+    </noscript>
+
+    <script is:inline>
+      // Offline support. Registration failure is non-fatal: the page itself is
+      // already self-contained, the worker only makes the SECOND visit work
+      // with the radio off.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function () {})
+        })
+      }
+    </script>
+  </body>
+</html>
