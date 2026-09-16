@@ -1,0 +1,133 @@
+# Weekly European price refresh. THIS ONE COSTS MONEY.
+#
+# A full Cardmarket pull is 4,666 singles rows + 699 sealed rows through the
+# Apify price-guide actor: ~$5.39 of credit, measured. Apify Starter includes
+# $19/month, so:
+#
+#     nightly  ~30 runs  ~$162/month   <- would exhaust the allowance in 4 days
+#     weekly     4 runs   ~$21.6/month <- marginally over
+#     10-daily   3 runs   ~$16.2/month <- fits, and is the default here
+#
+# Cardmarket publishes the guide daily, but European prices for Japanese cards
+# move slowly; a ten-day-old trend price is still a sound buy/no-buy signal.
+# Use the manual trigger to force a fresh pull right before travelling.
+
+name: Refresh European prices
+
+on:
+  schedule:
+    # 1st, 11th and 21st at 03:00 UTC - three runs a month, inside the $19 credit.
+    - cron: '0 3 1,11,21 * *'
+  workflow_dispatch:
+    inputs:
+      include_sealed:
+        description: 'Also refresh sealed (booster boxes and packs)'
+        type: boolean
+        default: true
+
+concurrency:
+  group: price-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Fail early and loudly rather than half-way through a paid pull.
+      - name: Check the Apify balance before spending
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          if [ -z "$APIFY_TOKEN" ]; then
+            echo "::error::APIFY_TOKEN is not set - add it as a repository secret."
+            exit 1
+          fi
+          curl -sf --max-time 30 "https://api.apify.com/v2/users/me?token=$APIFY_TOKEN" \
+            | node -e '
+              let s=""; process.stdin.on("data",d=>s+=d).on("end",()=>{
+                const p = JSON.parse(s).data?.plan ?? {};
+                console.log(`plan=${p.id} monthlyCreditUsd=${p.monthlyUsageCreditsUsd}`);
+                if (p.id === "FREE") {
+                  console.log("::warning::Apify is on the FREE plan, which caps every actor run at 5 rows. The pull will be refused as truncated.");
+                }
+              })'
+
+      - name: Pull Cardmarket singles
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: node scripts/pull-cardmarket.mjs --live --row-cap 100000 --max-items 5000 --max-runs 60
+
+      - name: Pull Cardmarket sealed
+        if: github.event_name == 'schedule' || inputs.include_sealed
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: node scripts/pull-sealed.mjs
+
+      # A truncated pull must never be published: partial Cardmarket data makes
+      # real cards look unpriceable, which reads as "worthless" at a counter.
+      - name: Refuse to publish a truncated pull
+        run: |
+          node -e '
+            const d = require("./data/cardmarket.json");
+            console.log(`rows=${d.rows?.length ?? 0} truncated=${d.truncated}`);
+            if (d.truncated === true) throw new Error("pull is truncated - refusing to publish partial European prices");
+            if ((d.rows?.length ?? 0) < 3000) throw new Error(`only ${d.rows?.length} rows - expected ~4,666`);
+          '
+
+      - name: Rebuild the index
+        run: node scripts/build-index.mjs
+
+      - run: pnpm test
+      - run: pnpm check
+      - run: pnpm build
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cardmarket.json data/sealed.json data/cardmarket-sealed-raw.json data/index.json
+          if git diff --cached --quiet; then
+            echo "No European price movement since the last run."
+          else
+            git commit -m "data: European price refresh (Cardmarket)"
+            git pull --rebase --autostash origin main
+            git push
+          fi
+
+      - name: Report what this run cost
+        if: always()
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          curl -sf --max-time 30 "https://api.apify.com/v2/users/me/usage/monthly?token=$APIFY_TOKEN" \
+            | node -e '
+              let s=""; process.stdin.on("data",d=>s+=d).on("end",()=>{
+                const u = JSON.parse(s).data ?? {};
+                const spent = u.totalUsageCreditsUsdAfterVolumeDiscount ?? u.totalUsageCreditsUsd ?? 0;
+                console.log(`Apify usage this month: $${Number(spent).toFixed(2)}`);
+              })' || echo "usage endpoint unavailable"
+
+      - name: Deploy to Cloudflare
+        if: success()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy

@@ -1,0 +1,22 @@
+# Cache rules. These matter more than usual here, because the PAGE is the data:
+# every price lives inside index.html, so caching it hard would freeze your
+# prices on the phone until the cache expired.
+
+# The page carries the whole price index. Always revalidate, so a redeploy with
+# fresh Yuyu-tei and Cardmarket numbers actually reaches the phone. The service
+# worker still serves the cached copy instantly when offline - this only governs
+# what happens when there IS signal.
+/
+  Cache-Control: no-cache
+
+/index.html
+  Cache-Control: no-cache
+
+# The service worker must never be served stale, or a broken one can pin itself
+# on the device and no redeploy will dislodge it.
+/sw.js
+  Cache-Control: no-cache
+
+# Astro emits content-hashed filenames here, so these are safe to cache forever.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

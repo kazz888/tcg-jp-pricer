@@ -17,7 +17,10 @@
     "pull:sealed": "node scripts/pull-sealed.mjs",
     "build:index": "node scripts/build-index.mjs",
     "pipeline": "pnpm pull:yuyutei && pnpm pull:cardmarket --live && pnpm pull:sealed && pnpm build:index",
-    "pipeline:dry": "pnpm pull:yuyutei && pnpm pull:sealed && pnpm build:index"
+    "pipeline:dry": "pnpm pull:yuyutei && pnpm pull:sealed && pnpm build:index",
+    "deploy": "pnpm build && wrangler deploy",
+    "deploy:dry": "pnpm build && wrangler deploy --dry-run",
+    "cf:login": "wrangler login"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",

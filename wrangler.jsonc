@@ -1,0 +1,28 @@
+{
+  // Cloudflare Worker serving ONLY static assets.
+  //
+  // There is no `main` and no server code on purpose: every price is baked into
+  // dist/index.html at build time so the app works with no signal in a Japanese
+  // basement. Nothing is computed per request, so there is nothing to run.
+  //
+  // Workers (not Pages) because Cloudflare put Pages into maintenance mode in
+  // 2025 - it still works, but all new investment goes to Workers with static
+  // assets. This is NOT the old "Workers Sites"; that is deprecated.
+  //
+  // Deploy:  pnpm deploy     (runs the build first)
+  // Preview: pnpm deploy:dry (no upload)
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tcg-jp-pricer",
+  "compatibility_date": "2026-09-15",
+
+  "assets": {
+    "directory": "./dist",
+    // Single-page app: every unknown path resolves to the one page this app
+    // has. The service worker already assumes that, so the two agree.
+    "not_found_handling": "single-page-application"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}

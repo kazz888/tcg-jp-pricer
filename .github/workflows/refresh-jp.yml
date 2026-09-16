@@ -1,0 +1,93 @@
+# Nightly Japanese price refresh.
+#
+# FREE to run: the repo is public, so Actions minutes are unlimited, and
+# Yuyu-tei costs nothing - the whole catalogue is 12 HTTP requests.
+#
+# Deliberately does NOT touch Cardmarket. That pull costs ~$5.39 of Apify credit
+# per run, so nightly would be ~$162/month against a $19 monthly allowance.
+# Europe is refreshed by refresh-eu.yml on a weekly cadence instead.
+
+name: Refresh Japanese prices
+
+on:
+  schedule:
+    # 16:00 UTC = 01:00 JST. Yuyu-tei's inventory has settled by then and the
+    # shops are shut, so we are not scraping during their trading day.
+    - cron: '0 16 * * *'
+  workflow_dispatch:
+
+# Both refresh workflows commit to main. Serialise them so they cannot race.
+concurrency:
+  group: price-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Scrape Yuyu-tei
+        run: node scripts/pull-yuyutei.mjs
+
+      # The scraper prints a loud warning if the row counts drift more than 2%
+      # from the measured baseline, which is how we would learn Yuyu-tei changed
+      # their markup. Refuse to publish an index built from a broken scrape.
+      - name: Sanity-check the scrape
+        run: |
+          node -e '
+            const d = require("./data/yuyutei.json");
+            const rows = d.rows?.length ?? 0;
+            const coded = d.rows?.filter(r => r.code && r.code !== "-").length ?? 0;
+            console.log(`rows=${rows} coded=${coded}`);
+            if (rows < 4000) throw new Error(`only ${rows} rows - scrape looks broken, refusing to publish`);
+            if (coded / rows < 0.9) throw new Error(`only ${(100*coded/rows).toFixed(1)}% carry a card code - parser drift?`);
+          '
+
+      - name: Rebuild the index
+        run: node scripts/build-index.mjs
+
+      - run: pnpm test
+      - run: pnpm check
+      - run: pnpm build
+
+      - name: Commit refreshed data
+        id: commit
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/yuyutei.json data/index.json
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No price movement since the last run."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git commit -m "data: nightly Yuyu-tei refresh"
+            git pull --rebase --autostash origin main
+            git push
+          fi
+
+      # Deploy whenever the build succeeded, even with no data change - a code
+      # change on main should still reach the phone.
+      - name: Deploy to Cloudflare
+        if: success()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler deploy
