@@ -52,23 +52,47 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       # Fail early and loudly rather than half-way through a paid pull.
+      #
+      # NB: never pipe `curl -sf` into a JSON parser. On any HTTP error -f emits
+      # NOTHING, so the parser dies on empty input and the real cause (a 401, a
+      # token with a pasted trailing newline) is invisible. Check the status code.
       - name: Check the Apify balance before spending
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: |
-          if [ -z "$APIFY_TOKEN" ]; then
-            echo "::error::APIFY_TOKEN is not set - add it as a repository secret."
+          # Trailing whitespace from a pasted secret is the usual culprit, and it
+          # turns into %0A in the query string. Strip it, then re-mask: the
+          # trimmed value is no longer byte-identical to the registered secret,
+          # so GitHub would not redact it on its own.
+          TOKEN="$(printf '%s' "$APIFY_TOKEN" | tr -d '[:space:]')"
+          echo "::add-mask::$TOKEN"
+
+          if [ -z "$TOKEN" ]; then
+            echo "::error::APIFY_TOKEN is empty. Add it under Settings -> Secrets and variables -> Actions."
             exit 1
           fi
-          curl -sf --max-time 30 "https://api.apify.com/v2/users/me?token=$APIFY_TOKEN" \
-            | node -e '
-              let s=""; process.stdin.on("data",d=>s+=d).on("end",()=>{
-                const p = JSON.parse(s).data?.plan ?? {};
-                console.log(`plan=${p.id} monthlyCreditUsd=${p.monthlyUsageCreditsUsd}`);
-                if (p.id === "FREE") {
-                  console.log("::warning::Apify is on the FREE plan, which caps every actor run at 5 rows. The pull will be refused as truncated.");
-                }
-              })'
+          echo "token length: ${#TOKEN} (an Apify token is 46 chars and starts apify_api_)"
+
+          CODE=$(curl -s -o /tmp/apify-me.json -w '%{http_code}' --max-time 30 \
+            "https://api.apify.com/v2/users/me?token=$TOKEN")
+          if [ "$CODE" != "200" ]; then
+            echo "::error::Apify /users/me returned HTTP $CODE - the token is wrong, expired, or was pasted with extra characters."
+            head -c 300 /tmp/apify-me.json || true
+            exit 1
+          fi
+
+          node -e '
+            const d = require("/tmp/apify-me.json").data ?? {};
+            const p = d.plan ?? {};
+            console.log(`user=${d.username} plan=${p.id} monthlyCreditUsd=${p.monthlyUsageCreditsUsd}`);
+            if (p.id === "FREE") {
+              console.log("::warning::Apify is on the FREE plan, which caps every actor run at 5 rows. The pull below will be refused as truncated.");
+            }
+          '
+
+          # Hand the cleaned token to every later step, so a stray newline cannot
+          # break the paid pull after we have already proved the token is good.
+          echo "APIFY_TOKEN=$TOKEN" >> "$GITHUB_ENV"
 
       - name: Pull Cardmarket singles
         env:
@@ -112,18 +136,29 @@ jobs:
             git push
           fi
 
+      # Never fail the run over a cost report - the data is already published by
+      # this point. Same status-code discipline as the check above, so a failure
+      # here reads as a failure and not as a JSON parse error.
       - name: Report what this run cost
         if: always()
-        env:
-          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: |
-          curl -sf --max-time 30 "https://api.apify.com/v2/users/me/usage/monthly?token=$APIFY_TOKEN" \
-            | node -e '
-              let s=""; process.stdin.on("data",d=>s+=d).on("end",()=>{
-                const u = JSON.parse(s).data ?? {};
-                const spent = u.totalUsageCreditsUsdAfterVolumeDiscount ?? u.totalUsageCreditsUsd ?? 0;
-                console.log(`Apify usage this month: $${Number(spent).toFixed(2)}`);
-              })' || echo "usage endpoint unavailable"
+          if [ -z "$APIFY_TOKEN" ]; then
+            echo "No token available - skipping the cost report."
+            exit 0
+          fi
+          CODE=$(curl -s -o /tmp/apify-usage.json -w '%{http_code}' --max-time 30 \
+            "https://api.apify.com/v2/users/me/usage/monthly?token=$APIFY_TOKEN") || CODE=000
+          if [ "$CODE" != "200" ]; then
+            echo "Usage endpoint returned HTTP $CODE - skipping the cost report."
+            exit 0
+          fi
+          node -e '
+            const u = require("/tmp/apify-usage.json").data ?? {};
+            const spent = u.totalUsageCreditsUsdAfterVolumeDiscount ?? u.totalUsageCreditsUsd ?? 0;
+            console.log(`Apify usage this billing cycle: $${Number(spent).toFixed(2)}`);
+            const c = u.usageCycle ?? {};
+            if (c.startAt) console.log(`cycle ${c.startAt.slice(0,10)} -> ${(c.endAt ?? "").slice(0,10)}`);
+          ' || echo "could not parse the usage response"
 
       - name: Deploy to Cloudflare
         if: success()
