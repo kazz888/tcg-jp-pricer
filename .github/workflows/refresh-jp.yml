@@ -1,20 +1,31 @@
-# Nightly Japanese price refresh.
+# Japanese price refresh — DOES NOT WORK ON GITHUB-HOSTED RUNNERS.
 #
-# FREE to run: the repo is public, so Actions minutes are unlimited, and
-# Yuyu-tei costs nothing - the whole catalogue is 12 HTTP requests.
+# yuyu-tei.jp returns 403 to GitHub's runners. This is not a User-Agent problem:
+# from a home connection even a bare `curl` with no UA at all gets 200, while the
+# runner gets 403 sending identical headers. They block Azure datacenter ranges,
+# which is exactly what GitHub-hosted runners are. Nothing in the request can fix
+# it, so the nightly scrape runs from a residential IP instead:
 #
-# Deliberately does NOT touch Cardmarket. That pull costs ~$5.39 of Apify credit
-# per run, so nightly would be ~$162/month against a $19 monthly allowance.
-# Europe is refreshed by refresh-eu.yml on a weekly cadence instead.
+#     bash scripts/install-nightly.sh      (macOS launchd, 01:00 daily)
+#
+# This workflow is kept for two cases:
+#   1. A self-hosted runner on a residential connection - change runs-on below.
+#   2. Rebuilding and redeploying from ALREADY-COMMITTED data after a code
+#      change, which needs no scrape at all (skip_scrape: true).
+#
+# Cardmarket is unaffected and still refreshes in CI - see refresh-eu.yml. It is
+# an Apify API call, not a scrape, so the runner's IP does not matter.
 
 name: Refresh Japanese prices
 
 on:
-  schedule:
-    # 16:00 UTC = 01:00 JST. Yuyu-tei's inventory has settled by then and the
-    # shops are shut, so we are not scraping during their trading day.
-    - cron: '0 16 * * *'
+  # No schedule: a nightly run here would 403 every night and mail you a failure.
   workflow_dispatch:
+    inputs:
+      skip_scrape:
+        description: 'Skip the scrape; just rebuild and deploy committed data'
+        type: boolean
+        default: false
 
 # Both refresh workflows commit to main. Serialise them so they cannot race.
 concurrency:
@@ -43,13 +54,34 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # Probe first, so a blocked runner reports WHY instead of dying three
+      # retries deep inside the scraper with a bare "HTTP 403 Forbidden".
+      - name: Can this runner reach Yuyu-tei?
+        if: ${{ !inputs.skip_scrape }}
+        id: reach
+        run: |
+          CODE=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
+            -A 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36' \
+            'https://yuyu-tei.jp/sell/opc/s/search?kizu=0')
+          echo "http=$CODE"
+          if [ "$CODE" = "403" ]; then
+            echo "::error::Yuyu-tei returned 403 to this runner. GitHub-hosted runners are on Azure ranges that Yuyu-tei blocks, and no header change fixes it. Run 'bash scripts/install-nightly.sh' on a machine with a residential connection, or point runs-on at a self-hosted runner."
+            exit 1
+          fi
+          if [ "$CODE" != "200" ]; then
+            echo "::error::Yuyu-tei returned HTTP $CODE - not the usual block, so check the site is up."
+            exit 1
+          fi
+
       - name: Scrape Yuyu-tei
+        if: ${{ !inputs.skip_scrape }}
         run: node scripts/pull-yuyutei.mjs
 
       # The scraper prints a loud warning if the row counts drift more than 2%
       # from the measured baseline, which is how we would learn Yuyu-tei changed
       # their markup. Refuse to publish an index built from a broken scrape.
       - name: Sanity-check the scrape
+        if: ${{ !inputs.skip_scrape }}
         run: |
           node -e '
             const d = require("./data/yuyutei.json");
