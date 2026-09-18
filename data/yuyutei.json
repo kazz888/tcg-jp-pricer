@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T23:19:49.432Z",
+  "generatedAt": "2026-09-18T23:00:42.968Z",
   "source": "yuyu-tei.jp",
   "game": "one-piece",
   "partial": false,
@@ -7,7 +7,7 @@
     "sellPages": 8,
     "buyPages": 4,
     "sellRows": 4784,
-    "buyRows": 1960
+    "buyRows": 1959
   },
   "rows": [
     {
@@ -24,9 +24,9 @@
       "cardId": "10155",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10155.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10155",
-      "jpySell": 4980,
-      "jpyBuy": 2000,
-      "jpyBuyPrev": 1700,
+      "jpySell": 3480,
+      "jpyBuy": 1400,
+      "jpyBuyPrev": 1200,
       "inStock": true,
       "stock": 3
     },
@@ -65,11 +65,11 @@
       "cardId": "10158",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10158.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10158",
-      "jpySell": 4980,
-      "jpyBuy": 1700,
-      "jpyBuyPrev": null,
-      "inStock": true,
-      "stock": 7
+      "jpySell": 3980,
+      "jpyBuy": 1800,
+      "jpyBuyPrev": 1400,
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "EB04-061",
@@ -269,10 +269,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op13/10152.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op13/10152",
       "jpySell": 12800,
-      "jpyBuy": 5000,
+      "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
       "inStock": true,
-      "stock": 3
+      "stock": 1
     },
     {
       "code": "OP13-118",
@@ -334,7 +334,7 @@
       "jpyBuy": 1400,
       "jpyBuyPrev": 1000,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "OP13-119",
@@ -703,7 +703,7 @@
       "jpyBuy": 700,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 6
     },
     {
       "code": "OP09-119",
@@ -997,7 +997,7 @@
       "jpyBuy": 600,
       "jpyBuyPrev": 400,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "OP07-119",
@@ -1057,8 +1057,8 @@
       "jpySell": 198000,
       "jpyBuy": 100000,
       "jpyBuyPrev": 70000,
-      "inStock": true,
-      "stock": 1
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "OP06-119",
@@ -1114,11 +1114,11 @@
       "cardId": "10145",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op05/10145.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op05/10145",
-      "jpySell": 29800,
-      "jpyBuy": 10000,
-      "jpyBuyPrev": null,
+      "jpySell": 24800,
+      "jpyBuy": 12000,
+      "jpyBuyPrev": 10000,
       "inStock": true,
-      "stock": 4
+      "stock": 3
     },
     {
       "code": "OP05-119",
@@ -1360,7 +1360,7 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/eb04/10079.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/eb04/10079",
       "jpySell": 5980,
-      "jpyBuy": 2700,
+      "jpyBuy": 2400,
       "jpyBuyPrev": 2000,
       "inStock": true,
       "stock": 2
@@ -1500,11 +1500,11 @@
       "cardId": "10154",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10154.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10154",
-      "jpySell": 2980,
-      "jpyBuy": 1200,
-      "jpyBuyPrev": 1000,
+      "jpySell": 1480,
+      "jpyBuy": 500,
+      "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 27
+      "stock": 31
     },
     {
       "code": "OP17-119",
@@ -1522,7 +1522,7 @@
       "jpyBuy": 1500,
       "jpyBuyPrev": 800,
       "inStock": true,
-      "stock": 2
+      "stock": 8
     },
     {
       "code": "OP16-118",
@@ -1540,7 +1540,7 @@
       "jpyBuy": 900,
       "jpyBuyPrev": 700,
       "inStock": true,
-      "stock": 9
+      "stock": 7
     },
     {
       "code": "OP16-119",
@@ -1594,7 +1594,7 @@
       "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 36
+      "stock": 37
     },
     {
       "code": "OP14-119",
@@ -1684,7 +1684,7 @@
       "jpyBuy": 200,
       "jpyBuyPrev": 100,
       "inStock": true,
-      "stock": 10
+      "stock": 11
     },
     {
       "code": "OP12-118",
@@ -1720,7 +1720,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 38
+      "stock": 37
     },
     {
       "code": "OP11-118",
@@ -1738,7 +1738,7 @@
       "jpyBuy": 350,
       "jpyBuyPrev": 250,
       "inStock": true,
-      "stock": 4
+      "stock": 6
     },
     {
       "code": "OP11-119",
@@ -1923,7 +1923,7 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op08/10140.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op08/10140",
       "jpySell": 320,
-      "jpyBuy": 100,
+      "jpyBuy": 50,
       "jpyBuyPrev": 30,
       "inStock": true,
       "stock": 12
@@ -2034,7 +2034,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 77
+      "stock": 78
     },
     {
       "code": "OP05-119",
@@ -2052,7 +2052,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 91
+      "stock": 92
     },
     {
       "code": "OP04-118",
@@ -2126,7 +2126,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": 30,
       "inStock": true,
-      "stock": 2
+      "stock": 3
     },
     {
       "code": "OP02-120",
@@ -2296,7 +2296,7 @@
       "jpyBuy": 10,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 33
+      "stock": 34
     },
     {
       "code": "OP11-119",
@@ -2338,7 +2338,7 @@
       "jpyBuy": 1400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 12
     },
     {
       "code": "OP02-120",
@@ -2379,8 +2379,8 @@
       "jpySell": 17800,
       "jpyBuy": 8000,
       "jpyBuyPrev": 6000,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP07-118",
@@ -2400,8 +2400,8 @@
       "jpySell": 2480,
       "jpyBuy": 1100,
       "jpyBuyPrev": 800,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP09-119",
@@ -2422,7 +2422,7 @@
       "jpyBuy": 18000,
       "jpyBuyPrev": 12500,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "OP05-119",
@@ -2459,8 +2459,8 @@
       "cardId": "10007",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10007.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10007",
-      "jpySell": 1480,
-      "jpyBuy": 300,
+      "jpySell": 1280,
+      "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
       "stock": 6
@@ -2500,9 +2500,9 @@
       "cardId": "10028",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10028.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10028",
-      "jpySell": 3980,
-      "jpyBuy": 2500,
-      "jpyBuyPrev": 1400,
+      "jpySell": 2980,
+      "jpyBuy": 1800,
+      "jpyBuyPrev": 1000,
       "inStock": true,
       "stock": 1
     },
@@ -2521,9 +2521,9 @@
       "cardId": "10029",
       "img": "https://card.yuyu-tei.jp/noimage_100_140.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10029",
-      "jpySell": 198000,
-      "jpyBuy": 160000,
-      "jpyBuyPrev": 80000,
+      "jpySell": 178000,
+      "jpyBuy": 120000,
+      "jpyBuyPrev": 70000,
       "inStock": false,
       "stock": 0
     },
@@ -2542,10 +2542,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10041.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10041",
       "jpySell": 1980,
-      "jpyBuy": 900,
-      "jpyBuyPrev": 800,
+      "jpyBuy": 800,
+      "jpyBuyPrev": 700,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "OP17-046",
@@ -2561,11 +2561,11 @@
       "cardId": "10061",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10061.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10061",
-      "jpySell": 2980,
-      "jpyBuy": 1500,
-      "jpyBuyPrev": 1000,
+      "jpySell": 1980,
+      "jpyBuy": 800,
+      "jpyBuyPrev": 700,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "OP17-048",
@@ -2581,11 +2581,11 @@
       "cardId": "10064",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10064.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10064",
-      "jpySell": 2480,
-      "jpyBuy": 900,
+      "jpySell": 1280,
+      "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "OP17-062",
@@ -2601,8 +2601,8 @@
       "cardId": "10083",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10083.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10083",
-      "jpySell": 1980,
-      "jpyBuy": 600,
+      "jpySell": 1280,
+      "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
       "stock": 14
@@ -2622,7 +2622,7 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10084.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10084",
       "jpySell": 19800,
-      "jpyBuy": 12000,
+      "jpyBuy": 9000,
       "jpyBuyPrev": 7000,
       "inStock": false,
       "stock": 0
@@ -2642,9 +2642,9 @@
       "cardId": "10085",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10085.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10085",
-      "jpySell": 128000,
-      "jpyBuy": 60000,
-      "jpyBuyPrev": 50000,
+      "jpySell": 99800,
+      "jpyBuy": 45000,
+      "jpyBuyPrev": 35000,
       "inStock": true,
       "stock": 1
     },
@@ -2702,9 +2702,9 @@
       "cardId": "10124",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10124.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10124",
-      "jpySell": 4980,
-      "jpyBuy": 3000,
-      "jpyBuyPrev": 1700,
+      "jpySell": 3980,
+      "jpyBuy": 2500,
+      "jpyBuyPrev": 1400,
       "inStock": true,
       "stock": 1
     },
@@ -2743,11 +2743,11 @@
       "cardId": "10147",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10147.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10147",
-      "jpySell": 99800,
-      "jpyBuy": 45000,
-      "jpyBuyPrev": 35000,
-      "inStock": true,
-      "stock": 1
+      "jpySell": 79800,
+      "jpyBuy": 35000,
+      "jpyBuyPrev": 25000,
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "OP16-003",
@@ -2807,7 +2807,7 @@
       "jpyBuy": 150,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 18
+      "stock": 14
     },
     {
       "code": "OP16-032",
@@ -2847,7 +2847,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 12
+      "stock": 8
     },
     {
       "code": "OP16-056",
@@ -2868,7 +2868,7 @@
       "jpyBuy": 800,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 12
+      "stock": 10
     },
     {
       "code": "OP16-065",
@@ -2929,7 +2929,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 11
     },
     {
       "code": "OP16-098",
@@ -3085,11 +3085,11 @@
       "cardId": "10074",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op15/10074.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op15/10074",
-      "jpySell": 680,
-      "jpyBuy": 200,
+      "jpySell": 780,
+      "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 13
+      "stock": 9
     },
     {
       "code": "OP15-078",
@@ -3126,10 +3126,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op15/10104.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op15/10104",
       "jpySell": 17800,
-      "jpyBuy": 8000,
+      "jpyBuy": 9000,
       "jpyBuyPrev": 7000,
       "inStock": true,
-      "stock": 4
+      "stock": 2
     },
     {
       "code": "OP15-113",
@@ -3390,7 +3390,7 @@
       "jpyBuy": 1400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 7
+      "stock": 8
     },
     {
       "code": "OP13-023",
@@ -3430,7 +3430,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 8
     },
     {
       "code": "OP13-042",
@@ -3450,7 +3450,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 15
+      "stock": 11
     },
     {
       "code": "OP13-054",
@@ -3510,7 +3510,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 22
+      "stock": 10
     },
     {
       "code": "OP13-082",
@@ -3550,7 +3550,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 21
+      "stock": 13
     },
     {
       "code": "OP13-110",
@@ -3570,7 +3570,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 12
     },
     {
       "code": "PRB02-002",
@@ -3590,7 +3590,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 15
+      "stock": 11
     },
     {
       "code": "PRB02-005",
@@ -3610,7 +3610,7 @@
       "jpyBuy": 700,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "PRB02-008",
@@ -3690,7 +3690,7 @@
       "jpyBuy": 1400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 15
+      "stock": 13
     },
     {
       "code": "ST15-002",
@@ -3710,8 +3710,8 @@
       "jpySell": 980,
       "jpyBuy": 400,
       "jpyBuyPrev": 250,
-      "inStock": true,
-      "stock": 1
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "ST16-004",
@@ -3793,7 +3793,7 @@
       "jpyBuy": 1200,
       "jpyBuyPrev": 900,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "OP12-030",
@@ -3872,8 +3872,8 @@
       "jpySell": 2480,
       "jpyBuy": 1200,
       "jpyBuyPrev": 900,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP12-073",
@@ -3893,7 +3893,7 @@
       "jpyBuy": 500,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 6
     },
     {
       "code": "OP12-087",
@@ -4030,10 +4030,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op11/10064.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op11/10064",
       "jpySell": 980,
-      "jpyBuy": 300,
-      "jpyBuyPrev": null,
+      "jpyBuy": 400,
+      "jpyBuyPrev": 300,
       "inStock": true,
-      "stock": 10
+      "stock": 6
     },
     {
       "code": "OP11-054",
@@ -4110,10 +4110,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op11/10113.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op11/10113",
       "jpySell": 980,
-      "jpyBuy": 300,
-      "jpyBuyPrev": null,
+      "jpyBuy": 400,
+      "jpyBuyPrev": 300,
       "inStock": true,
-      "stock": 13
+      "stock": 9
     },
     {
       "code": "OP11-095",
@@ -4293,7 +4293,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 8
     },
     {
       "code": "OP10-072",
@@ -4414,7 +4414,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "OP09-023",
@@ -4474,7 +4474,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 9
+      "stock": 10
     },
     {
       "code": "OP09-048",
@@ -4531,7 +4531,7 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op09/10092.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op09/10092",
       "jpySell": 580,
-      "jpyBuy": 200,
+      "jpyBuy": 150,
       "jpyBuyPrev": 100,
       "inStock": true,
       "stock": 2
@@ -4595,7 +4595,7 @@
       "jpyBuy": 250,
       "jpyBuyPrev": 150,
       "inStock": true,
-      "stock": 2
+      "stock": 3
     },
     {
       "code": "OP01-024",
@@ -4700,7 +4700,7 @@
       "jpyBuy": 1000,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 6
+      "stock": 7
     },
     {
       "code": "OP02-004",
@@ -4785,7 +4785,7 @@
       "jpyBuy": 150,
       "jpyBuyPrev": 50,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "OP02-114",
@@ -5302,7 +5302,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 7
+      "stock": 8
     },
     {
       "code": "OP08-106",
@@ -5402,7 +5402,7 @@
       "jpyBuy": 250,
       "jpyBuyPrev": 200,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "OP07-045",
@@ -5483,7 +5483,7 @@
       "jpyBuy": 500,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 9
+      "stock": 5
     },
     {
       "code": "OP07-072",
@@ -5503,7 +5503,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 12
+      "stock": 9
     },
     {
       "code": "OP07-085",
@@ -5660,10 +5660,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op06/10076.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op06/10076",
       "jpySell": 580,
-      "jpyBuy": 200,
+      "jpyBuy": 250,
       "jpyBuyPrev": 150,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP06-069",
@@ -5702,8 +5702,8 @@
       "jpySell": 1280,
       "jpyBuy": 600,
       "jpyBuyPrev": 400,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP06-093",
@@ -5965,7 +5965,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "OP05-093",
@@ -6022,10 +6022,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op05/10154.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op05/10154",
       "jpySell": 9980,
-      "jpyBuy": 3600,
+      "jpyBuy": 4500,
       "jpyBuyPrev": 3200,
       "inStock": true,
-      "stock": 4
+      "stock": 2
     },
     {
       "code": "ST01-012",
@@ -7311,7 +7311,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 6
     },
     {
       "code": "EB04-058",
@@ -7752,7 +7752,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": 300,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "EB01-022",
@@ -7904,11 +7904,11 @@
       "cardId": "10027",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10027.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10027",
-      "jpySell": 780,
-      "jpyBuy": 300,
-      "jpyBuyPrev": 250,
+      "jpySell": 580,
+      "jpyBuy": 50,
+      "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 26
+      "stock": 30
     },
     {
       "code": "OP17-031",
@@ -7926,7 +7926,7 @@
       "jpyBuy": 20,
       "jpyBuyPrev": 10,
       "inStock": true,
-      "stock": 7
+      "stock": 15
     },
     {
       "code": "OP17-046",
@@ -7940,11 +7940,11 @@
       "cardId": "10060",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10060.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10060",
-      "jpySell": 420,
-      "jpyBuy": 50,
-      "jpyBuyPrev": 30,
+      "jpySell": 220,
+      "jpyBuy": null,
+      "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 46
+      "stock": 51
     },
     {
       "code": "OP17-048",
@@ -7959,10 +7959,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10063.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10063",
       "jpySell": 220,
-      "jpyBuy": 20,
+      "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 34
+      "stock": 38
     },
     {
       "code": "OP17-062",
@@ -7977,10 +7977,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10082.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10082",
       "jpySell": 220,
-      "jpyBuy": 20,
+      "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 34
+      "stock": 43
     },
     {
       "code": "OP17-063",
@@ -7995,10 +7995,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10086.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10086",
       "jpySell": 220,
-      "jpyBuy": 5,
+      "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 60
+      "stock": 68
     },
     {
       "code": "OP17-080",
@@ -8012,11 +8012,11 @@
       "cardId": "10107",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10107.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10107",
-      "jpySell": 320,
-      "jpyBuy": 30,
+      "jpySell": 220,
+      "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 38
+      "stock": 46
     },
     {
       "code": "OP17-093",
@@ -8034,7 +8034,7 @@
       "jpyBuy": 200,
       "jpyBuyPrev": 150,
       "inStock": true,
-      "stock": 16
+      "stock": 21
     },
     {
       "code": "OP17-112",
@@ -8049,10 +8049,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10145.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10145",
       "jpySell": 420,
-      "jpyBuy": 50,
+      "jpyBuy": 20,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 18
+      "stock": 22
     },
     {
       "code": "OP16-003",
@@ -8088,7 +8088,7 @@
       "jpyBuy": 30,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 34
+      "stock": 35
     },
     {
       "code": "OP16-026",
@@ -8306,7 +8306,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 76
+      "stock": 77
     },
     {
       "code": "OP15-053",
@@ -8324,7 +8324,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 56
+      "stock": 57
     },
     {
       "code": "OP15-060",
@@ -8360,7 +8360,7 @@
       "jpyBuy": 1000,
       "jpyBuyPrev": 800,
       "inStock": true,
-      "stock": 23
+      "stock": 24
     },
     {
       "code": "OP15-086",
@@ -8396,7 +8396,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": 30,
       "inStock": true,
-      "stock": 9
+      "stock": 10
     },
     {
       "code": "OP15-114",
@@ -8486,7 +8486,7 @@
       "jpyBuy": 350,
       "jpyBuyPrev": 250,
       "inStock": true,
-      "stock": 9
+      "stock": 10
     },
     {
       "code": "OP14-049",
@@ -8504,7 +8504,7 @@
       "jpyBuy": 10,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 49
+      "stock": 50
     },
     {
       "code": "OP14-069",
@@ -8614,7 +8614,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 84
+      "stock": 85
     },
     {
       "code": "OP13-023",
@@ -8992,7 +8992,7 @@
       "jpyBuy": 30,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 30
+      "stock": 31
     },
     {
       "code": "OP12-073",
@@ -9064,7 +9064,7 @@
       "jpyBuy": 10,
       "jpyBuyPrev": 5,
       "inStock": true,
-      "stock": 16
+      "stock": 18
     },
     {
       "code": "OP11-004",
@@ -9154,7 +9154,7 @@
       "jpyBuy": 30,
       "jpyBuyPrev": 20,
       "inStock": true,
-      "stock": 23
+      "stock": 24
     },
     {
       "code": "OP11-067",
@@ -9262,7 +9262,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 34
+      "stock": 35
     },
     {
       "code": "OP10-016",
@@ -9442,7 +9442,7 @@
       "jpyBuy": 2,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 6
+      "stock": 7
     },
     {
       "code": "OP09-009",
@@ -9621,8 +9621,8 @@
       "jpySell": 120,
       "jpyBuy": 3,
       "jpyBuyPrev": 1,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP08-023",
@@ -9676,7 +9676,7 @@
       "jpyBuy": 20,
       "jpyBuyPrev": 5,
       "inStock": true,
-      "stock": 6
+      "stock": 7
     },
     {
       "code": "OP08-074",
@@ -9765,8 +9765,8 @@
       "jpySell": 320,
       "jpyBuy": 30,
       "jpyBuyPrev": 10,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP08-112",
@@ -9820,7 +9820,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 11
+      "stock": 13
     },
     {
       "code": "OP07-029",
@@ -9856,7 +9856,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 60
+      "stock": 61
     },
     {
       "code": "OP07-051",
@@ -9910,7 +9910,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 35
+      "stock": 36
     },
     {
       "code": "OP07-085",
@@ -9928,7 +9928,7 @@
       "jpyBuy": 10,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 54
+      "stock": 55
     },
     {
       "code": "OP07-109",
@@ -10148,7 +10148,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 41
+      "stock": 42
     },
     {
       "code": "OP06-107",
@@ -10721,10 +10721,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op02/10006.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op02/10006",
       "jpySell": 120,
-      "jpyBuy": null,
-      "jpyBuyPrev": null,
+      "jpyBuy": 2,
+      "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 11
+      "stock": 10
     },
     {
       "code": "OP02-013",
@@ -11174,7 +11174,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 53
+      "stock": 51
     },
     {
       "code": "ST33-004",
@@ -11246,7 +11246,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 60
+      "stock": 64
     },
     {
       "code": "ST31-001",
@@ -11624,7 +11624,7 @@
       "jpyBuy": 150,
       "jpyBuyPrev": 100,
       "inStock": true,
-      "stock": 9
+      "stock": 10
     },
     {
       "code": "ST21-015",
@@ -11642,7 +11642,7 @@
       "jpyBuy": 10,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 4
+      "stock": 6
     },
     {
       "code": "ST20-001",
@@ -12468,9 +12468,9 @@
       "cardId": "10009",
       "img": "https://card.yuyu-tei.jp/opc/100_140/eb04/10009.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/eb04/10009",
-      "jpySell": 4980,
-      "jpyBuy": 2700,
-      "jpyBuyPrev": 2000,
+      "jpySell": 3980,
+      "jpyBuy": 2200,
+      "jpyBuyPrev": 1700,
       "inStock": true,
       "stock": 7
     },
@@ -12670,7 +12670,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 30
+      "stock": 31
     },
     {
       "code": "EB03-026",
@@ -12688,7 +12688,7 @@
       "jpyBuy": 10,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 25
+      "stock": 26
     },
     {
       "code": "EB03-031",
@@ -12778,7 +12778,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 64
+      "stock": 65
     },
     {
       "code": "EB02-006",
@@ -12796,7 +12796,7 @@
       "jpyBuy": 10,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 12
+      "stock": 11
     },
     {
       "code": "EB02-011",
@@ -12850,7 +12850,7 @@
       "jpyBuy": 30,
       "jpyBuyPrev": 20,
       "inStock": true,
-      "stock": 18
+      "stock": 19
     },
     {
       "code": "EB02-035",
@@ -12958,7 +12958,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": 30,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "EB01-012",
@@ -13126,7 +13126,7 @@
       "jpyBuy": 7000,
       "jpyBuyPrev": 5000,
       "inStock": true,
-      "stock": 4
+      "stock": 3
     },
     {
       "code": "OP11-067",
@@ -13146,8 +13146,8 @@
       "jpySell": 3480,
       "jpyBuy": 1600,
       "jpyBuyPrev": 1200,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP12-034",
@@ -13167,8 +13167,8 @@
       "jpySell": 9980,
       "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP12-094",
@@ -13188,8 +13188,8 @@
       "jpySell": 1980,
       "jpyBuy": 900,
       "jpyBuyPrev": 700,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP13-108",
@@ -13586,8 +13586,8 @@
       "jpySell": 12800,
       "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP04-083",
@@ -13607,8 +13607,8 @@
       "jpySell": 4980,
       "jpyBuy": 2200,
       "jpyBuyPrev": 1700,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP07-064",
@@ -13628,8 +13628,8 @@
       "jpySell": 3980,
       "jpyBuy": 1800,
       "jpyBuyPrev": 1400,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP08-069",
@@ -13650,7 +13650,7 @@
       "jpyBuy": 900,
       "jpyBuyPrev": 700,
       "inStock": true,
-      "stock": 2
+      "stock": 3
     },
     {
       "code": "OP08-074",
@@ -13710,10 +13710,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-op10/10125.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-op10/10125",
       "jpySell": 9980,
-      "jpyBuy": 3000,
-      "jpyBuyPrev": null,
+      "jpyBuy": 4000,
+      "jpyBuyPrev": 3000,
       "inStock": true,
-      "stock": 11
+      "stock": 4
     },
     {
       "code": "OP07-064",
@@ -14278,7 +14278,7 @@
       "jpyBuy": 13000,
       "jpyBuyPrev": 10000,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "ST04-003",
@@ -14404,7 +14404,7 @@
       "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "ST10-006",
@@ -14697,7 +14697,7 @@
       "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 12
     },
     {
       "code": "OP17-037",
@@ -14713,11 +14713,11 @@
       "cardId": "10049",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10049.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10049",
-      "jpySell": 7980,
-      "jpyBuy": 2400,
-      "jpyBuyPrev": null,
+      "jpySell": 6980,
+      "jpyBuy": 3200,
+      "jpyBuyPrev": 2200,
       "inStock": true,
-      "stock": 5
+      "stock": 2
     },
     {
       "code": "OP17-049",
@@ -14753,11 +14753,11 @@
       "cardId": "10072",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10072.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10072",
-      "jpySell": 2480,
-      "jpyBuy": 900,
+      "jpySell": 1780,
+      "jpyBuy": 700,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 8
+      "stock": 9
     },
     {
       "code": "OP17-061",
@@ -14773,8 +14773,8 @@
       "cardId": "10081",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10081.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10081",
-      "jpySell": 1280,
-      "jpyBuy": 300,
+      "jpySell": 980,
+      "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
       "stock": 11
@@ -14794,10 +14794,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10116.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10116",
       "jpySell": 2480,
-      "jpyBuy": 1000,
+      "jpyBuy": 1200,
       "jpyBuyPrev": 900,
-      "inStock": true,
-      "stock": 3
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "OP17-114",
@@ -14817,7 +14817,7 @@
       "jpyBuy": 1000,
       "jpyBuyPrev": 800,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "OP16-014",
@@ -14898,7 +14898,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 16
+      "stock": 12
     },
     {
       "code": "OP16-063",
@@ -14959,7 +14959,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 14
+      "stock": 10
     },
     {
       "code": "OP16-073",
@@ -15020,7 +15020,7 @@
       "jpyBuy": 8000,
       "jpyBuyPrev": 6000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP15-003",
@@ -15036,11 +15036,11 @@
       "cardId": "10006",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op15/10006.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op15/10006",
-      "jpySell": 780,
-      "jpyBuy": 250,
+      "jpySell": 980,
+      "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "OP15-025",
@@ -15060,7 +15060,7 @@
       "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 6
     },
     {
       "code": "OP15-047",
@@ -15076,11 +15076,11 @@
       "cardId": "10058",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op15/10058.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op15/10058",
-      "jpySell": 680,
-      "jpyBuy": 250,
+      "jpySell": 780,
+      "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "OP15-061",
@@ -15100,7 +15100,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 2
+      "stock": 3
     },
     {
       "code": "OP15-077",
@@ -15177,10 +15177,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op15/10140.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op15/10140",
       "jpySell": 9980,
-      "jpyBuy": 3600,
+      "jpyBuy": 4500,
       "jpyBuyPrev": 3200,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP14-015",
@@ -15260,7 +15260,7 @@
       "jpyBuy": 150,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 17
+      "stock": 13
     },
     {
       "code": "OP14-090",
@@ -15341,7 +15341,7 @@
       "jpyBuy": 20000,
       "jpyBuyPrev": 12000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP13-016",
@@ -15401,7 +15401,7 @@
       "jpyBuy": 800,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 6
+      "stock": 7
     },
     {
       "code": "OP13-065",
@@ -15441,7 +15441,7 @@
       "jpyBuy": 1600,
       "jpyBuyPrev": 1200,
       "inStock": true,
-      "stock": 2
+      "stock": 3
     },
     {
       "code": "OP13-080",
@@ -15581,7 +15581,7 @@
       "jpyBuy": 600,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 12
+      "stock": 8
     },
     {
       "code": "OP13-089",
@@ -15701,7 +15701,7 @@
       "jpyBuy": 600,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 13
+      "stock": 9
     },
     {
       "code": "PRB02-003",
@@ -15741,7 +15741,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 18
+      "stock": 14
     },
     {
       "code": "PRB02-006",
@@ -15781,7 +15781,7 @@
       "jpyBuy": 200,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 15
+      "stock": 9
     },
     {
       "code": "PRB02-009",
@@ -15822,7 +15822,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "PRB02-012",
@@ -15862,7 +15862,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "PRB02-015",
@@ -16130,10 +16130,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/prb02/10084.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/prb02/10084",
       "jpySell": 17800,
-      "jpyBuy": 8000,
+      "jpyBuy": 9000,
       "jpyBuyPrev": 7000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP09-076",
@@ -16214,10 +16214,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/prb02/10091.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/prb02/10091",
       "jpySell": 14800,
-      "jpyBuy": 7000,
+      "jpyBuy": 8000,
       "jpyBuyPrev": 6000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP10-011",
@@ -16359,8 +16359,8 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op12/10038.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op12/10038",
       "jpySell": 1280,
-      "jpyBuy": 500,
-      "jpyBuyPrev": 400,
+      "jpyBuy": 400,
+      "jpyBuyPrev": null,
       "inStock": true,
       "stock": 4
     },
@@ -16442,7 +16442,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 15
+      "stock": 11
     },
     {
       "code": "OP12-086",
@@ -16502,7 +16502,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 15
+      "stock": 11
     },
     {
       "code": "OP11-018",
@@ -16678,9 +16678,9 @@
       "cardId": "10025",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op10/10025.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op10/10025",
-      "jpySell": 4980,
-      "jpyBuy": 2700,
-      "jpyBuyPrev": 2000,
+      "jpySell": 5980,
+      "jpyBuy": 3200,
+      "jpyBuyPrev": 2200,
       "inStock": true,
       "stock": 1
     },
@@ -16842,7 +16842,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 6
     },
     {
       "code": "OP09-051",
@@ -16862,7 +16862,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "OP09-051",
@@ -17781,7 +17781,7 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op08/10019.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op08/10019",
       "jpySell": 580,
-      "jpyBuy": 200,
+      "jpyBuy": 150,
       "jpyBuyPrev": 100,
       "inStock": true,
       "stock": 2
@@ -18024,7 +18024,7 @@
       "jpyBuy": 600,
       "jpyBuyPrev": 400,
       "inStock": true,
-      "stock": 2
+      "stock": 1
     },
     {
       "code": "OP06-025",
@@ -18144,7 +18144,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 6
     },
     {
       "code": "OP05-034",
@@ -18384,8 +18384,8 @@
       "jpySell": 980,
       "jpyBuy": 500,
       "jpyBuyPrev": 300,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP03-024",
@@ -18845,7 +18845,7 @@
       "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 6
     },
     {
       "code": "EB04-052",
@@ -18885,7 +18885,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 19
+      "stock": 11
     },
     {
       "code": "EB03-013",
@@ -18965,7 +18965,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 11
+      "stock": 7
     },
     {
       "code": "EB03-057",
@@ -19085,7 +19085,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 12
+      "stock": 8
     },
     {
       "code": "EB02-054",
@@ -19105,7 +19105,7 @@
       "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 5
+      "stock": 6
     },
     {
       "code": "EB01-003",
@@ -19226,7 +19226,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": 250,
       "inStock": true,
-      "stock": 5
+      "stock": 6
     },
     {
       "code": "OP17-003",
@@ -19402,7 +19402,7 @@
       "cardId": "10053",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10053.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10053",
-      "jpySell": 220,
+      "jpySell": 120,
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
@@ -19438,11 +19438,11 @@
       "cardId": "10065",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10065.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10065",
-      "jpySell": 220,
+      "jpySell": 120,
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 42
+      "stock": 38
     },
     {
       "code": "OP17-054",
@@ -19456,7 +19456,7 @@
       "cardId": "10071",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10071.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10071",
-      "jpySell": 220,
+      "jpySell": 120,
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
@@ -19474,7 +19474,7 @@
       "cardId": "10073",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10073.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10073",
-      "jpySell": 220,
+      "jpySell": 120,
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
@@ -19528,7 +19528,7 @@
       "cardId": "10099",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10099.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10099",
-      "jpySell": 320,
+      "jpySell": 220,
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
@@ -19604,7 +19604,7 @@
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 29
+      "stock": 28
     },
     {
       "code": "OP17-096",
@@ -19672,7 +19672,7 @@
       "cardId": "10149",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10149.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10149",
-      "jpySell": 220,
+      "jpySell": 120,
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
@@ -19784,7 +19784,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 10
+      "stock": 11
     },
     {
       "code": "OP16-027",
@@ -20256,7 +20256,7 @@
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 17
+      "stock": 15
     },
     {
       "code": "OP15-024",
@@ -21018,7 +21018,7 @@
       "jpyBuy": 200,
       "jpyBuyPrev": 150,
       "inStock": true,
-      "stock": 18
+      "stock": 14
     },
     {
       "code": "OP14-100",
@@ -21104,11 +21104,11 @@
       "cardId": "10142",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op14/10142.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op14/10142",
-      "jpySell": 180,
-      "jpyBuy": null,
+      "jpySell": 220,
+      "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 33
+      "stock": 30
     },
     {
       "code": "OP13-012",
@@ -22694,7 +22694,7 @@
       "jpyBuy": 20,
       "jpyBuyPrev": 5,
       "inStock": true,
-      "stock": 8
+      "stock": 6
     },
     {
       "code": "OP11-108",
@@ -24211,8 +24211,8 @@
       "jpySell": 320,
       "jpyBuy": 100,
       "jpyBuyPrev": 30,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP08-039",
@@ -24626,7 +24626,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 7
+      "stock": 8
     },
     {
       "code": "OP07-016",
@@ -25129,8 +25129,8 @@
       "jpySell": 780,
       "jpyBuy": 350,
       "jpyBuyPrev": 250,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP06-036",
@@ -29701,7 +29701,7 @@
       "jpyBuy": 100,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 25
+      "stock": 26
     },
     {
       "code": "EB02-022",
@@ -29827,7 +29827,7 @@
       "jpyBuy": 2,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 9
+      "stock": 10
     },
     {
       "code": "EB02-041",
@@ -29899,7 +29899,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "EB02-054",
@@ -29953,7 +29953,7 @@
       "jpyBuy": 10,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "EB01-002",
@@ -29968,10 +29968,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/eb01/10003.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/eb01/10003",
       "jpySell": 120,
-      "jpyBuy": null,
-      "jpyBuyPrev": null,
+      "jpyBuy": 5,
+      "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 13
+      "stock": 10
     },
     {
       "code": "EB01-003",
@@ -30585,7 +30585,7 @@
       "jpyBuy": 8000,
       "jpyBuyPrev": 6000,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "OP12-079",
@@ -30605,8 +30605,8 @@
       "jpySell": 7980,
       "jpyBuy": 4000,
       "jpyBuyPrev": 3000,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP11-071",
@@ -31066,9 +31066,9 @@
       "cardId": "10069",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-op20/10069.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-op20/10069",
-      "jpySell": 2480,
-      "jpyBuy": 900,
-      "jpyBuyPrev": 700,
+      "jpySell": 1980,
+      "jpyBuy": 800,
+      "jpyBuyPrev": 600,
       "inStock": true,
       "stock": 3
     },
@@ -31087,9 +31087,9 @@
       "cardId": "10070",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-op20/10070.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-op20/10070",
-      "jpySell": 4980,
-      "jpyBuy": 1600,
-      "jpyBuyPrev": 1200,
+      "jpySell": 2980,
+      "jpyBuy": 1000,
+      "jpyBuyPrev": 800,
       "inStock": true,
       "stock": 2
     },
@@ -31108,11 +31108,11 @@
       "cardId": "10071",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-op20/10071.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-op20/10071",
-      "jpySell": 12800,
+      "jpySell": 9980,
       "jpyBuy": 4000,
-      "jpyBuyPrev": 3200,
+      "jpyBuyPrev": 3000,
       "inStock": true,
-      "stock": 3
+      "stock": 1
     },
     {
       "code": "OP14-027",
@@ -31610,8 +31610,8 @@
       "jpySell": 320,
       "jpyBuy": 30,
       "jpyBuyPrev": 10,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP01-114",
@@ -31631,8 +31631,8 @@
       "jpySell": 220,
       "jpyBuy": 10,
       "jpyBuyPrev": 1,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP06-104",
@@ -31652,8 +31652,8 @@
       "jpySell": 1780,
       "jpyBuy": 1000,
       "jpyBuyPrev": 700,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP05-019",
@@ -31673,8 +31673,8 @@
       "jpySell": 220,
       "jpyBuy": 50,
       "jpyBuyPrev": 20,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP01-114",
@@ -32009,7 +32009,7 @@
       "jpyBuy": 1100,
       "jpyBuyPrev": 800,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "OP05-030",
@@ -32030,7 +32030,7 @@
       "jpyBuy": 1100,
       "jpyBuyPrev": 800,
       "inStock": true,
-      "stock": 2
+      "stock": 3
     },
     {
       "code": "OP07-021",
@@ -33117,8 +33117,8 @@
       "cardId": "10002",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-prb10/10002.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-prb10/10002",
-      "jpySell": 4980,
-      "jpyBuy": 1200,
+      "jpySell": 3980,
+      "jpyBuy": 1000,
       "jpyBuyPrev": null,
       "inStock": true,
       "stock": 2
@@ -33486,8 +33486,8 @@
       "jpySell": 220,
       "jpyBuy": 10,
       "jpyBuyPrev": 1,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP03-079",
@@ -36062,7 +36062,7 @@
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 25
+      "stock": 23
     },
     {
       "code": "OP14-107",
@@ -37362,7 +37362,7 @@
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 15
+      "stock": 19
     },
     {
       "code": "OP12-026",
@@ -40260,8 +40260,8 @@
       "jpySell": 80,
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
-      "inStock": true,
-      "stock": 3
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "OP08-066",
@@ -40297,7 +40297,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 9
+      "stock": 10
     },
     {
       "code": "OP08-083",
@@ -45229,8 +45229,8 @@
       "jpySell": 420,
       "jpyBuy": 100,
       "jpyBuyPrev": 30,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP05-114",
@@ -45250,8 +45250,8 @@
       "jpySell": 420,
       "jpyBuy": 50,
       "jpyBuyPrev": 20,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP01-039",
@@ -45333,8 +45333,8 @@
       "jpySell": 5980,
       "jpyBuy": 3200,
       "jpyBuyPrev": 2200,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP01-077",
@@ -45855,9 +45855,9 @@
       "cardId": "10208",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-op10/10208.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-op10/10208",
-      "jpySell": 4980,
-      "jpyBuy": 1400,
-      "jpyBuyPrev": 1200,
+      "jpySell": 2980,
+      "jpyBuy": 900,
+      "jpyBuyPrev": 800,
       "inStock": true,
       "stock": 7
     },
@@ -45899,7 +45899,7 @@
       "jpyBuy": 20,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 5
+      "stock": 6
     },
     {
       "code": "OP17-088",
@@ -45919,7 +45919,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 12
     },
     {
       "code": "OP05-097",
@@ -46802,8 +46802,8 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/st30/10022.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/st30/10022",
       "jpySell": 980,
-      "jpyBuy": 400,
-      "jpyBuyPrev": 300,
+      "jpyBuy": 300,
+      "jpyBuyPrev": null,
       "inStock": true,
       "stock": 2
     },
@@ -46843,9 +46843,9 @@
       "cardId": "10028",
       "img": "https://card.yuyu-tei.jp/opc/100_140/st30/10028.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/st30/10028",
-      "jpySell": 4980,
-      "jpyBuy": 2500,
-      "jpyBuyPrev": 1700,
+      "jpySell": 3480,
+      "jpyBuy": 1400,
+      "jpyBuyPrev": 1200,
       "inStock": true,
       "stock": 2
     },
@@ -47945,7 +47945,7 @@
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 65
+      "stock": 64
     },
     {
       "code": "OP17-034",
@@ -52129,7 +52129,7 @@
       "jpyBuy": null,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 23
+      "stock": 20
     },
     {
       "code": "ST02-007",
@@ -54940,10 +54940,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op10/10074.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op10/10074",
       "jpySell": 30,
-      "jpyBuy": 2,
+      "jpyBuy": 3,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 6
+      "stock": 4
     },
     {
       "code": "OP10-064",
@@ -56453,7 +56453,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "ST04-005",
@@ -63603,11 +63603,11 @@
       "cardId": "10027",
       "img": "https://card.yuyu-tei.jp/opc/100_140/st30/10027.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/st30/10027",
-      "jpySell": 420,
-      "jpyBuy": 50,
+      "jpySell": 320,
+      "jpyBuy": 30,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 38
+      "stock": 34
     },
     {
       "code": "ST30-015",
@@ -64740,8 +64740,8 @@
       "jpySell": 320,
       "jpyBuy": 100,
       "jpyBuyPrev": 30,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 2
     },
     {
       "code": "ST20-002",
@@ -69856,10 +69856,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/eb01/10011.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/eb01/10011",
       "jpySell": 30,
-      "jpyBuy": null,
-      "jpyBuyPrev": null,
+      "jpyBuy": 2,
+      "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 11
+      "stock": 8
     },
     {
       "code": "EB01-009",
@@ -70452,8 +70452,8 @@
       "jpySell": 220,
       "jpyBuy": 10,
       "jpyBuyPrev": 1,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP04-095",
@@ -70472,8 +70472,8 @@
       "jpySell": 120,
       "jpyBuy": 3,
       "jpyBuyPrev": 1,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP04-010",
@@ -71823,7 +71823,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 6
+      "stock": 7
     },
     {
       "code": "ST03-013",
@@ -71864,8 +71864,8 @@
       "jpySell": 420,
       "jpyBuy": 100,
       "jpyBuyPrev": 30,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "ST04-017",
@@ -71885,8 +71885,8 @@
       "jpySell": 220,
       "jpyBuy": 50,
       "jpyBuyPrev": 20,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "ST02-010",
@@ -71925,10 +71925,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-st10/10074.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-st10/10074",
       "jpySell": 9980,
-      "jpyBuy": 5000,
+      "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
       "inStock": true,
-      "stock": 8
+      "stock": 4
     },
     {
       "code": "ST01-007",
@@ -72260,9 +72260,9 @@
       "cardId": "10115",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-st10/10115.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-st10/10115",
-      "jpySell": 2480,
-      "jpyBuy": 900,
-      "jpyBuyPrev": 700,
+      "jpySell": 1980,
+      "jpyBuy": 800,
+      "jpyBuyPrev": 600,
       "inStock": true,
       "stock": 3
     },
@@ -72281,9 +72281,9 @@
       "cardId": "10116",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-st10/10116.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-st10/10116",
-      "jpySell": 2480,
-      "jpyBuy": 900,
-      "jpyBuyPrev": 700,
+      "jpySell": 1980,
+      "jpyBuy": 800,
+      "jpyBuyPrev": 600,
       "inStock": true,
       "stock": 2
     },
@@ -72302,9 +72302,9 @@
       "cardId": "10117",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-st10/10117.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-st10/10117",
-      "jpySell": 4980,
-      "jpyBuy": 1600,
-      "jpyBuyPrev": 1200,
+      "jpySell": 3980,
+      "jpyBuy": 1400,
+      "jpyBuyPrev": 1000,
       "inStock": true,
       "stock": 4
     },
@@ -72344,9 +72344,9 @@
       "cardId": "10027",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-eb10/10027.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-eb10/10027",
-      "jpySell": 4980,
-      "jpyBuy": 1600,
-      "jpyBuyPrev": 1200,
+      "jpySell": 3980,
+      "jpyBuy": 1400,
+      "jpyBuyPrev": 1000,
       "inStock": true,
       "stock": 1
     },
@@ -72384,9 +72384,9 @@
       "cardId": "10025",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10025.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10025",
-      "jpySell": 2980,
-      "jpyBuy": 1200,
-      "jpyBuyPrev": 1000,
+      "jpySell": 1980,
+      "jpyBuy": 800,
+      "jpyBuyPrev": 700,
       "inStock": true,
       "stock": 3
     },
@@ -72404,9 +72404,9 @@
       "cardId": "10052",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10052.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10052",
-      "jpySell": 3980,
-      "jpyBuy": 2000,
-      "jpyBuyPrev": 1700,
+      "jpySell": 2980,
+      "jpyBuy": 1400,
+      "jpyBuyPrev": 1200,
       "inStock": true,
       "stock": 3
     },
@@ -72424,9 +72424,9 @@
       "cardId": "10077",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10077.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10077",
-      "jpySell": 1980,
-      "jpyBuy": 1000,
-      "jpyBuyPrev": 800,
+      "jpySell": 1780,
+      "jpyBuy": 800,
+      "jpyBuyPrev": 600,
       "inStock": true,
       "stock": 2
     },
@@ -72444,9 +72444,9 @@
       "cardId": "10105",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10105.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10105",
-      "jpySell": 5980,
-      "jpyBuy": 3000,
-      "jpyBuyPrev": 2000,
+      "jpySell": 3980,
+      "jpyBuy": 2000,
+      "jpyBuyPrev": 1400,
       "inStock": true,
       "stock": 3
     },
@@ -72465,9 +72465,9 @@
       "cardId": "10106",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10106.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10106",
-      "jpySell": 148000,
-      "jpyBuy": 70000,
-      "jpyBuyPrev": 60000,
+      "jpySell": 128000,
+      "jpyBuy": 60000,
+      "jpyBuyPrev": 50000,
       "inStock": true,
       "stock": 1
     },
@@ -72485,11 +72485,11 @@
       "cardId": "10131",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10131.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10131",
-      "jpySell": 1480,
-      "jpyBuy": 600,
+      "jpySell": 1280,
+      "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 6
+      "stock": 7
     },
     {
       "code": "OP16-001",
@@ -72569,7 +72569,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 14
+      "stock": 10
     },
     {
       "code": "OP16-079",
@@ -72629,7 +72629,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 12
+      "stock": 8
     },
     {
       "code": "OP15-002",
@@ -72646,7 +72646,7 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op15/10004.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op15/10004",
       "jpySell": 2980,
-      "jpyBuy": 1600,
+      "jpyBuy": 1400,
       "jpyBuyPrev": 1200,
       "inStock": true,
       "stock": 1
@@ -72766,7 +72766,7 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op14/10025.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op14/10025",
       "jpySell": 7980,
-      "jpyBuy": 6500,
+      "jpyBuy": 4000,
       "jpyBuyPrev": 3000,
       "inStock": false,
       "stock": 0
@@ -72849,7 +72849,7 @@
       "jpyBuy": 800,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 10
+      "stock": 9
     },
     {
       "code": "OP14-080",
@@ -72885,8 +72885,8 @@
       "cardId": "10002",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op13/10002.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op13/10002",
-      "jpySell": 4980,
-      "jpyBuy": 2000,
+      "jpySell": 3980,
+      "jpyBuy": 1400,
       "jpyBuyPrev": null,
       "inStock": true,
       "stock": 6
@@ -72929,7 +72929,7 @@
       "jpyBuy": 700,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 13
+      "stock": 9
     },
     {
       "code": "OP13-004",
@@ -73026,10 +73026,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op12/10025.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op12/10025",
       "jpySell": 5980,
-      "jpyBuy": 2400,
+      "jpyBuy": 2700,
       "jpyBuyPrev": 2000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP12-040",
@@ -73185,9 +73185,9 @@
       "cardId": "10050",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op11/10050.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op11/10050",
-      "jpySell": 4980,
-      "jpyBuy": 2700,
-      "jpyBuyPrev": 2000,
+      "jpySell": 5980,
+      "jpyBuy": 3200,
+      "jpyBuyPrev": 2200,
       "inStock": false,
       "stock": 0
     },
@@ -73309,7 +73309,7 @@
       "jpyBuy": 600,
       "jpyBuyPrev": 400,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "OP10-042",
@@ -73628,8 +73628,8 @@
       "jpySell": 1280,
       "jpyBuy": 600,
       "jpyBuyPrev": 400,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP07-019",
@@ -73666,10 +73666,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op07/10046.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op07/10046",
       "jpySell": 12800,
-      "jpyBuy": 5000,
+      "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
       "inStock": true,
-      "stock": 4
+      "stock": 2
     },
     {
       "code": "OP07-059",
@@ -73729,7 +73729,7 @@
       "jpyBuy": 1200,
       "jpyBuyPrev": 900,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "OP06-001",
@@ -73889,7 +73889,7 @@
       "jpyBuy": 400,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "OP05-022",
@@ -73929,7 +73929,7 @@
       "jpyBuy": 300,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 12
+      "stock": 8
     },
     {
       "code": "OP05-060",
@@ -73945,11 +73945,11 @@
       "cardId": "10073",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op05/10073.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op05/10073",
-      "jpySell": 12800,
-      "jpyBuy": 6000,
-      "jpyBuyPrev": 4000,
+      "jpySell": 9980,
+      "jpyBuy": 4500,
+      "jpyBuyPrev": 3200,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP05-098",
@@ -74449,7 +74449,7 @@
       "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
       "inStock": true,
-      "stock": 2
+      "stock": 1
     },
     {
       "code": "OP01-003",
@@ -74545,9 +74545,9 @@
       "cardId": "10079",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op01/10079.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op01/10079",
-      "jpySell": 5980,
-      "jpyBuy": 3000,
-      "jpyBuyPrev": 2000,
+      "jpySell": 4980,
+      "jpyBuy": 2000,
+      "jpyBuyPrev": 1700,
       "inStock": true,
       "stock": 4
     },
@@ -74748,8 +74748,8 @@
       "jpySell": 980,
       "jpyBuy": 500,
       "jpyBuyPrev": 300,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "EB02-010",
@@ -76969,7 +76969,7 @@
       "jpyBuy": 5,
       "jpyBuyPrev": 1,
       "inStock": true,
-      "stock": 1
+      "stock": 2
     },
     {
       "code": "OP03-058",
@@ -77617,7 +77617,7 @@
       "jpyBuy": 900,
       "jpyBuyPrev": 800,
       "inStock": true,
-      "stock": 9
+      "stock": 10
     },
     {
       "code": "OP03-099",
@@ -79070,8 +79070,8 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10167.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10167",
       "jpySell": 6980,
-      "jpyBuy": 4000,
-      "jpyBuyPrev": 2200,
+      "jpyBuy": 3500,
+      "jpyBuyPrev": 2400,
       "inStock": false,
       "stock": 0
     },
@@ -79089,11 +79089,11 @@
       "cardId": "10168",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10168.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10168",
-      "jpySell": 34800,
-      "jpyBuy": 16000,
-      "jpyBuyPrev": 12500,
+      "jpySell": 24800,
+      "jpyBuy": 13000,
+      "jpyBuyPrev": 10000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP14-108",
@@ -79109,9 +79109,9 @@
       "cardId": "10169",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10169.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10169",
-      "jpySell": 12800,
-      "jpyBuy": 6000,
-      "jpyBuyPrev": 5000,
+      "jpySell": 9980,
+      "jpyBuy": 4500,
+      "jpyBuyPrev": 3200,
       "inStock": true,
       "stock": 2
     },
@@ -79129,11 +79129,11 @@
       "cardId": "10170",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10170.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10170",
-      "jpySell": 24800,
-      "jpyBuy": 13000,
-      "jpyBuyPrev": 10000,
-      "inStock": true,
-      "stock": 1
+      "jpySell": 19800,
+      "jpyBuy": 11000,
+      "jpyBuyPrev": 8000,
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "ST27-005",
@@ -79149,11 +79149,11 @@
       "cardId": "10171",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10171.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10171",
-      "jpySell": 29800,
-      "jpyBuy": 20000,
+      "jpySell": 24800,
+      "jpyBuy": 13000,
       "jpyBuyPrev": 10000,
-      "inStock": true,
-      "stock": 1
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "ST31-004",
@@ -79169,9 +79169,9 @@
       "cardId": "10172",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10172.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10172",
-      "jpySell": 99800,
+      "jpySell": 79800,
       "jpyBuy": 40000,
-      "jpyBuyPrev": null,
+      "jpyBuyPrev": 30000,
       "inStock": true,
       "stock": 1
     },
@@ -79189,11 +79189,11 @@
       "cardId": "10173",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10173.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10173",
-      "jpySell": 29800,
-      "jpyBuy": 14000,
-      "jpyBuyPrev": 12000,
+      "jpySell": 19800,
+      "jpyBuy": 11000,
+      "jpyBuyPrev": 8000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "EB04-007",
@@ -79209,9 +79209,9 @@
       "cardId": "10174",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10174.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10174",
-      "jpySell": 34800,
-      "jpyBuy": 18000,
-      "jpyBuyPrev": 12500,
+      "jpySell": 24800,
+      "jpyBuy": 13000,
+      "jpyBuyPrev": 10000,
       "inStock": true,
       "stock": 1
     },
@@ -79229,9 +79229,9 @@
       "cardId": "10175",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10175.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10175",
-      "jpySell": 19800,
-      "jpyBuy": 10000,
-      "jpyBuyPrev": 8000,
+      "jpySell": 14800,
+      "jpyBuy": 7000,
+      "jpyBuyPrev": 6000,
       "inStock": true,
       "stock": 3
     },
@@ -79249,8 +79249,8 @@
       "cardId": "10176",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10176.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10176",
-      "jpySell": 14800,
-      "jpyBuy": 9000,
+      "jpySell": 12800,
+      "jpyBuy": 7000,
       "jpyBuyPrev": 5000,
       "inStock": true,
       "stock": 1
@@ -79450,10 +79450,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op15/10152.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op15/10152",
       "jpySell": 29800,
-      "jpyBuy": 12000,
+      "jpyBuy": 13000,
       "jpyBuyPrev": 10000,
       "inStock": true,
-      "stock": 4
+      "stock": 2
     },
     {
       "code": "EB02-052",
@@ -79610,10 +79610,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op14/10156.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op14/10156",
       "jpySell": 5980,
-      "jpyBuy": 2000,
-      "jpyBuyPrev": null,
+      "jpyBuy": 2700,
+      "jpyBuyPrev": 2000,
       "inStock": true,
-      "stock": 5
+      "stock": 2
     },
     {
       "code": "OP09-051",
@@ -79755,7 +79755,7 @@
       "jpyBuy": 13000,
       "jpyBuyPrev": 10000,
       "inStock": true,
-      "stock": 4
+      "stock": 2
     },
     {
       "code": "OP10-030",
@@ -79772,10 +79772,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op13/10170.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op13/10170",
       "jpySell": 5980,
-      "jpyBuy": 3000,
+      "jpyBuy": 4000,
       "jpyBuyPrev": 2000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP13-118",
@@ -79795,7 +79795,7 @@
       "jpyBuy": 16000,
       "jpyBuyPrev": 12000,
       "inStock": true,
-      "stock": 4
+      "stock": 2
     },
     {
       "code": "OP13-119",
@@ -79915,10 +79915,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/prb02/10176.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/prb02/10176",
       "jpySell": 29800,
-      "jpyBuy": 14000,
+      "jpyBuy": 16000,
       "jpyBuyPrev": 12000,
       "inStock": true,
-      "stock": 4
+      "stock": 2
     },
     {
       "code": "OP05-091",
@@ -79999,10 +79999,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/prb02/10180.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/prb02/10180",
       "jpySell": 5980,
-      "jpyBuy": 2000,
-      "jpyBuyPrev": null,
+      "jpyBuy": 2400,
+      "jpyBuyPrev": 2000,
       "inStock": true,
-      "stock": 8
+      "stock": 3
     },
     {
       "code": "OP10-119",
@@ -80140,10 +80140,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op12/10153.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op12/10153",
       "jpySell": 17800,
-      "jpyBuy": 9000,
+      "jpyBuy": 10000,
       "jpyBuyPrev": 6000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP09-093",
@@ -80205,7 +80205,7 @@
       "jpyBuy": 7000,
       "jpyBuyPrev": 5000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "OP07-085",
@@ -80224,8 +80224,8 @@
       "jpySell": 9980,
       "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP09-005",
@@ -80241,11 +80241,11 @@
       "cardId": "10151",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op11/10151.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op11/10151",
-      "jpySell": 4980,
-      "jpyBuy": 1700,
-      "jpyBuyPrev": null,
+      "jpySell": 5980,
+      "jpyBuy": 2700,
+      "jpyBuyPrev": 2000,
       "inStock": true,
-      "stock": 4
+      "stock": 1
     },
     {
       "code": "ST16-004",
@@ -80424,10 +80424,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/op10/10149.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op10/10149",
       "jpySell": 19800,
-      "jpyBuy": 10000,
+      "jpyBuy": 11000,
       "jpyBuyPrev": 8000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "ST18-001",
@@ -80606,8 +80606,8 @@
       "jpySell": 12800,
       "jpyBuy": 8000,
       "jpyBuyPrev": 4000,
-      "inStock": true,
-      "stock": 1
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "OP09-051",
@@ -80667,7 +80667,7 @@
       "jpyBuy": 30000,
       "jpyBuyPrev": 20000,
       "inStock": true,
-      "stock": 3
+      "stock": 2
     },
     {
       "code": "ST02-007",
@@ -81643,11 +81643,11 @@
       "cardId": "10044",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10044.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10044",
-      "jpySell": 1480,
-      "jpyBuy": 600,
-      "jpyBuyPrev": 400,
-      "inStock": false,
-      "stock": 0
+      "jpySell": 1280,
+      "jpyBuy": 500,
+      "jpyBuyPrev": 300,
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "OP16-042",
@@ -82751,8 +82751,8 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-200/10014.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-200/10014",
       "jpySell": 1980,
-      "jpyBuy": 800,
-      "jpyBuyPrev": 700,
+      "jpyBuy": 700,
+      "jpyBuyPrev": null,
       "inStock": true,
       "stock": 20
     },
@@ -83489,10 +83489,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-100/10007.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-100/10007",
       "jpySell": 5980,
-      "jpyBuy": 2000,
-      "jpyBuyPrev": null,
+      "jpyBuy": 2700,
+      "jpyBuyPrev": 2000,
       "inStock": true,
-      "stock": 16
+      "stock": 4
     },
     {
       "code": "P-007",
@@ -83506,9 +83506,9 @@
       "cardId": "10008",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-100/10008.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-100/10008",
-      "jpySell": 5980,
-      "jpyBuy": 2700,
-      "jpyBuyPrev": 2000,
+      "jpySell": 3980,
+      "jpyBuy": 1800,
+      "jpyBuyPrev": 1400,
       "inStock": true,
       "stock": 1
     },
@@ -83822,7 +83822,7 @@
       "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
       "inStock": true,
-      "stock": 4
+      "stock": 2
     },
     {
       "code": "P-025",
@@ -83893,11 +83893,11 @@
       "cardId": "10030",
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-100/10030.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-100/10030",
-      "jpySell": 14800,
-      "jpyBuy": 5000,
-      "jpyBuyPrev": null,
+      "jpySell": 12800,
+      "jpyBuy": 6000,
+      "jpyBuyPrev": 4000,
       "inStock": true,
-      "stock": 19
+      "stock": 4
     },
     {
       "code": "P-028",
@@ -84302,10 +84302,10 @@
       "img": "https://card.yuyu-tei.jp/opc/100_140/promo-100/10051.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/promo-100/10051",
       "jpySell": 12800,
-      "jpyBuy": 5000,
+      "jpyBuy": 6000,
       "jpyBuyPrev": 4000,
       "inStock": true,
-      "stock": 8
+      "stock": 4
     },
     {
       "code": "P-044",
@@ -85265,7 +85265,7 @@
       "jpyBuy": 900,
       "jpyBuyPrev": 800,
       "inStock": true,
-      "stock": 6
+      "stock": 8
     },
     {
       "code": "P-075",
@@ -85285,7 +85285,7 @@
       "jpyBuy": 4000,
       "jpyBuyPrev": 3000,
       "inStock": true,
-      "stock": 3
+      "stock": 4
     },
     {
       "code": "P-082",
@@ -85549,8 +85549,8 @@
       "jpySell": 420,
       "jpyBuy": 100,
       "jpyBuyPrev": 30,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 2
     },
     {
       "code": "P-089",
@@ -85950,9 +85950,9 @@
       "cardId": "10160",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10160.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10160",
-      "jpySell": 1280,
-      "jpyBuy": 400,
-      "jpyBuyPrev": 250,
+      "jpySell": 500,
+      "jpyBuy": 100,
+      "jpyBuyPrev": 30,
       "inStock": true,
       "stock": 5
     },
@@ -85992,9 +85992,9 @@
       "cardId": "10162",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10162.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10162",
-      "jpySell": 2480,
-      "jpyBuy": 800,
-      "jpyBuyPrev": 600,
+      "jpySell": 1780,
+      "jpyBuy": 600,
+      "jpyBuyPrev": 400,
       "inStock": false,
       "stock": 0
     },
@@ -86034,9 +86034,9 @@
       "cardId": "10164",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10164.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10164",
-      "jpySell": 1280,
-      "jpyBuy": 400,
-      "jpyBuyPrev": 250,
+      "jpySell": 980,
+      "jpyBuy": 350,
+      "jpyBuyPrev": 150,
       "inStock": true,
       "stock": 3
     },
@@ -86076,11 +86076,11 @@
       "cardId": "10166",
       "img": "https://card.yuyu-tei.jp/opc/100_140/op17/10166.jpg",
       "detailUrl": "https://yuyu-tei.jp/sell/opc/card/op17/10166",
-      "jpySell": 4980,
-      "jpyBuy": 1600,
-      "jpyBuyPrev": 1200,
-      "inStock": false,
-      "stock": 0
+      "jpySell": 2980,
+      "jpyBuy": 1000,
+      "jpyBuyPrev": 800,
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "-",
@@ -86206,7 +86206,7 @@
       "jpyBuy": 800,
       "jpyBuyPrev": 700,
       "inStock": true,
-      "stock": 4
+      "stock": 3
     },
     {
       "code": "-",
@@ -86248,7 +86248,7 @@
       "jpyBuy": 250,
       "jpyBuyPrev": null,
       "inStock": true,
-      "stock": 21
+      "stock": 22
     },
     {
       "code": "-",
@@ -86771,8 +86771,8 @@
       "jpySell": 120,
       "jpyBuy": 10,
       "jpyBuyPrev": 1,
-      "inStock": true,
-      "stock": 7
+      "inStock": false,
+      "stock": 0
     },
     {
       "code": "-",
@@ -89204,8 +89204,8 @@
       "jpySell": 320,
       "jpyBuy": 20,
       "jpyBuyPrev": 5,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "-",
@@ -90434,8 +90434,8 @@
       "jpySell": 220,
       "jpyBuy": 50,
       "jpyBuyPrev": 20,
-      "inStock": false,
-      "stock": 0
+      "inStock": true,
+      "stock": 1
     },
     {
       "code": "-",
