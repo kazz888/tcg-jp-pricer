@@ -82,15 +82,25 @@ console.log(`[ui] baked ${cardCount} cards from ${indexPath}${fixtureArg ? ' (FI
       </div>
     </noscript>
 
-    <script is:inline>
-      // Offline support. Registration failure is non-fatal: the page itself is
-      // already self-contained, the worker only makes the SECOND visit work
-      // with the radio off.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('/sw.js').catch(function () {})
+    {import.meta.env.PROD ? (
+      <script is:inline>
+        // Offline support. Registration failure is non-fatal: the page itself is
+        // already self-contained, the worker only makes the SECOND visit work
+        // with the radio off.
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/sw.js').catch(function () {})
+          })
+        }
+      </script>
+    ) : (
+      <script is:inline>
+        // Dev only: a worker left behind by `pnpm preview` on this same port
+        // serves its cached build (cache-first), which renders a blank page.
+        navigator.serviceWorker && navigator.serviceWorker.getRegistrations().then(function (rs) {
+          rs.forEach(function (r) { r.unregister() })
         })
-      }
-    </script>
+      </script>
+    )}
   </body>
 </html>

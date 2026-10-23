@@ -102,6 +102,9 @@ self.addEventListener('fetch', function (event) {
   }
 
   if (url.origin !== self.location.origin) return
+  // The backup API must always hit the network: a cached answer would hand back
+  // an old copy of your bookmarks.
+  if (url.pathname.startsWith('/api/')) return
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return
 
   if (request.mode === 'navigate') {

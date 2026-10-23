@@ -5,6 +5,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import type { Card, Fx } from '../lib/types'
+import { Stepper } from './CollectionView'
 import EuPanel from './EuPanel'
 import Keypad from './Keypad'
 import { hasArt, hasRarity, pct, setOf, signedYen, yen } from './model'
@@ -41,6 +42,8 @@ export default function CardView({
   fx,
   bookmarked,
   onToggleBookmark,
+  ownedQty,
+  onOwnedQty,
   onPick,
   onBack,
 }: {
@@ -51,6 +54,9 @@ export default function CardView({
   /** Whether THIS printing is bookmarked - not the code. */
   bookmarked: boolean
   onToggleBookmark: (c: Card) => void
+  /** Copies of THIS printing in your collection. */
+  ownedQty: number
+  onOwnedQty: (c: Card, qty: number) => void
   onPick: (c: Card) => void
   onBack: () => void
 }) {
@@ -122,6 +128,11 @@ export default function CardView({
             {!card.inStock ? <span className="tag tag--oos">Out of stock at Yuyu-tei</span> : null}
             <span className={tag.cls}>{tag.text}</span>
           </div>
+        </div>
+
+        <div className="own">
+          <span className="own__label">In your collection</span>
+          <Stepper qty={ownedQty} name={card.code} onQty={(q) => onOwnedQty(card, q)} />
         </div>
 
         {siblings.length > 1 ? (

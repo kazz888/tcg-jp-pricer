@@ -32,8 +32,9 @@ export const CODE_RE = /^(?:[A-Z]{2,4}\d{2}-\d{3}|P-\d{3}|-)$/
 
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
-export function pageUrl(side, page) {
-  const base = side === 'buy' ? BUY_BASE : SELL_BASE
+/** game: Yuyu-tei's catalogue slug - 'opc' One Piece, 'poc' Pokemon. */
+export function pageUrl(side, page, game = 'opc') {
+  const base = (side === 'buy' ? BUY_BASE : SELL_BASE).replace('/opc/', `/${game}/`)
   return page <= 1 ? base : `${base}&page=${page}`
 }
 
@@ -212,13 +213,13 @@ export const rowKey = (r) => `${r.setBucket}::${r.cardId}`
  * Walk pages of one side until a page yields 0 blocks (or maxPages is hit).
  * Polite: ~1 request/second.
  */
-export async function sweep(side, { maxPages = 20, delayMs = 1000, log = () => {} } = {}) {
+export async function sweep(side, { maxPages = 20, delayMs = 1000, log = () => {}, game = 'opc' } = {}) {
   const rows = []
   const pageCounts = []
   let pagesFetched = 0
 
   for (let page = 1; page <= maxPages; page++) {
-    const url = pageUrl(side, page)
+    const url = pageUrl(side, page, game)
     log(`  GET ${url}`)
     const html = await fetchPage(url, { log })
     pagesFetched++

@@ -1,28 +1,38 @@
 {
-  // Cloudflare Worker serving ONLY static assets.
-  //
-  // There is no `main` and no server code on purpose: every price is baked into
-  // dist/index.html at build time so the app works with no signal in a Japanese
-  // basement. Nothing is computed per request, so there is nothing to run.
-  //
-  // Workers (not Pages) because Cloudflare put Pages into maintenance mode in
-  // 2025 - it still works, but all new investment goes to Workers with static
-  // assets. This is NOT the old "Workers Sites"; that is deprecated.
-  //
-  // Deploy:  pnpm deploy     (runs the build first)
-  // Preview: pnpm deploy:dry (no upload)
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tcg-jp-pricer",
-  "compatibility_date": "2026-09-15",
-
-  "assets": {
-    "directory": "./dist",
-    // Single-page app: every unknown path resolves to the one page this app
-    // has. The service worker already assumes that, so the two agree.
-    "not_found_handling": "single-page-application"
-  },
-
-  "observability": {
-    "enabled": true
-  }
+	// Cloudflare Worker serving static assets, plus one tiny backup API.
+	//
+	// Every price is baked into dist/index.html at build time so the app works
+	// with no signal in a Japanese basement. The only code that runs per request
+	// is worker.js, and only for /api/* - it backs up your bookmarks and
+	// collection to KV so a phone clearing website data cannot lose them.
+	//
+	// Workers (not Pages) because Cloudflare put Pages into maintenance mode in
+	// 2025 - it still works, but all new investment goes to Workers with static
+	// assets. This is NOT the old "Workers Sites"; that is deprecated.
+	//
+	// Deploy:  pnpm deploy     (runs the build first)
+	// Preview: pnpm deploy:dry (no upload)
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "tcg-jp-pricer",
+	"compatibility_date": "2026-09-15",
+	"main": "worker.js",
+	// No id: `wrangler deploy` creates the namespace on first deploy.
+	"kv_namespaces": [
+		{
+			"binding": "STATE",
+			"id": "4261226e46ae46b3b6a3c62cb890add3"
+		}
+	],
+	"assets": {
+		"directory": "./dist",
+		// Single-page app: every unknown path resolves to the one page this app
+		// has. The service worker already assumes that, so the two agree.
+		"not_found_handling": "single-page-application",
+		"run_worker_first": [
+			"/api/*"
+		]
+	},
+	"observability": {
+		"enabled": true
+	}
 }

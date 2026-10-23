@@ -4,17 +4,31 @@
 // with everything it will ever need. If the pipeline has not run there is an
 // explicit empty state - never a screen of zeroes.
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { Card } from '../lib/types'
 import BookmarksView from './BookmarksView'
 import CardView from './CardView'
+import CollectionView from './CollectionView'
 import CoverageView from './CoverageView'
 import GapsView from './GapsView'
 import SealedView from './SealedView'
 import SearchView from './SearchView'
 import { keyOf, readBookmarks, toggleKey, writeBookmarks } from './bookmarks'
+import { readCollection, withQty, writeCollection, type Owned } from './collection'
+import {
+  isDirty,
+  mergeStates,
+  pull,
+  push,
+  readSyncKey,
+  setDirty,
+  SyncError,
+  writeSyncKey,
+  type SyncState,
+  type SyncStatus,
+} from './sync'
 import { buildEntries } from './matching'
-import { loadIndexFromDom, sealedOf, type LoadedIndex } from './model'
+import { hasArt, loadIndexFromDom, sealedOf, type LoadedIndex } from './model'
 
 type View =
   | { name: 'search' }
@@ -23,6 +37,7 @@ type View =
   | { name: 'gaps' }
   | { name: 'sealed' }
   | { name: 'bookmarks' }
+  | { name: 'collection' }
 
 const RECENT_KEY = 'tcgjp.recent.v1'
 const RECENT_MAX = 6
@@ -88,9 +103,65 @@ export default function App() {
   const [setFilter, setSetFilter] = useState<string | null>(null)
   const [recentKeys, setRecentKeys] = useState<string[]>(() => readRecent())
   const [bookmarkKeys, setBookmarkKeys] = useState<string[]>(() => readBookmarks())
+  const [owned, setOwned] = useState<Owned[]>(() => readCollection())
   const [online, setOnline] = useState(true)
+  const [backupStatus, setBackupStatus] = useState<SyncStatus>(() => (readSyncKey() ? 'saving' : 'off'))
 
   const { index, hasData, isFixture } = loaded
+
+  // Pull on open, push after changes. `link` is the moment a key is entered on
+  // this device: both sides are merged instead of the server replacing local.
+  const backup = useCallback(async (link = false) => {
+    const key = readSyncKey()
+    if (!key) return setBackupStatus('off')
+    setBackupStatus('saving')
+    try {
+      let state: SyncState = { bookmarks: readBookmarks(), collection: readCollection() }
+      if (!isDirty() || link) {
+        const server = await pull(key)
+        // A tap during the pull made this device dirty: keep that, push it.
+        if (server && !isDirty()) {
+          state = link ? mergeStates(server, state) : server
+          writeBookmarks(state.bookmarks)
+          writeCollection(state.collection)
+          setBookmarkKeys(readBookmarks())
+          setOwned(readCollection())
+          if (!link) return setBackupStatus('saved')
+        }
+      }
+      await push(key, state)
+      setDirty(false)
+      setBackupStatus('saved')
+    } catch (e) {
+      setBackupStatus(e instanceof SyncError ? e.status : 'failed')
+    }
+  }, [])
+
+  const backupTimer = useRef<number | undefined>(undefined)
+  const queueBackup = useCallback(() => {
+    setDirty(true)
+    if (!readSyncKey()) return
+    clearTimeout(backupTimer.current)
+    // Batches a run of +/+/+ taps into one upload.
+    backupTimer.current = window.setTimeout(() => void backup(), 1500)
+  }, [backup])
+
+  useEffect(() => {
+    void backup()
+    const retry = () => void backup()
+    window.addEventListener('online', retry)
+    return () => window.removeEventListener('online', retry)
+  }, [backup])
+
+  const setBackupKey = () => {
+    const key = prompt(
+      'Backup key: the SYNC_KEY you set on Cloudflare. Leave empty to turn backup off on this device.',
+      readSyncKey(),
+    )
+    if (key === null) return
+    writeSyncKey(key.trim())
+    void backup(true)
+  }
 
   useEffect(() => {
     const sync = () => setOnline(navigator.onLine)
@@ -181,7 +252,25 @@ export default function App() {
       writeBookmarks(next)
       return next
     })
-  }, [])
+    queueBackup()
+  }, [queueBackup])
+
+  // Never drops a card silently: going to zero asks first (a photo cannot be
+  // recovered), and a failed write leaves the screen showing what is stored.
+  const setOwnedQty = (item: Owned, qty: number): boolean => {
+    if (qty <= 0 && !confirm(`Remove ${item.name} from your collection?`)) return false
+    const next = withQty(owned, item, qty)
+    if (!writeCollection(next)) {
+      alert('Could not save: storage on this device is full or blocked. Nothing was changed.')
+      return false
+    }
+    setOwned(next)
+    queueBackup()
+    return true
+  }
+
+  const setCardQty = (c: Card, qty: number) =>
+    setOwnedQty({ id: keyOf(c), game: 'onepiece', name: c.name, code: c.code, img: hasArt(c.img) ? c.img : '', qty }, qty)
 
   const pick = useCallback(
     (c: Card) => {
@@ -224,6 +313,8 @@ export default function App() {
         onBack={back}
       />
     )
+  } else if (view.name === 'collection') {
+    screen = <CollectionView items={owned} onQty={setOwnedQty} onBack={back} />
   } else if (view.name === 'card' && active) {
     screen = (
       <CardView
@@ -232,6 +323,8 @@ export default function App() {
         fx={index.fx}
         bookmarked={bookmarkSet.has(view.key)}
         onToggleBookmark={toggleBookmark}
+        ownedQty={owned.find((x) => x.id === view.key)?.qty ?? 0}
+        onOwnedQty={setCardQty}
         onPick={pick}
         onBack={back}
       />
@@ -248,6 +341,8 @@ export default function App() {
         recent={recent}
         onPick={pick}
         onOpenCoverage={() => go({ name: 'coverage' })}
+        backupStatus={backupStatus}
+        onBackup={setBackupKey}
       />
     )
   }
@@ -323,6 +418,19 @@ export default function App() {
             </span>
           </button>
           ) : null}
+          {/* Always shown: it is the only way in to add a Pokemon card. */}
+          <button type="button" className="navdock__btn" onClick={() => go({ name: 'collection' })}>
+            <span className="navdock__glyph" aria-hidden="true">
+              ▤
+            </span>
+            <span className="navdock__text">
+              <span className="navdock__title">Collection · {owned.length}</span>
+              <span className="navdock__sub">Cards you bought · One Piece &amp; Pokémon</span>
+            </span>
+            <span className="navdock__chev" aria-hidden="true">
+              ›
+            </span>
+          </button>
         </nav>
       ) : null}
     </div>

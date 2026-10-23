@@ -43,6 +43,11 @@ node -e '
   if (coded / rows < 0.9) throw new Error(`only ${(100*coded/rows).toFixed(1)}% carry a code - parser drift?`);
 '
 
+# The collection's Pokemon card list. It only changes when a set comes out, and a
+# failed pull keeps yesterday's file, so it must never block the price refresh.
+log "scraping Yuyu-tei Pokemon card list"
+node scripts/pull-pokemon.mjs >/dev/null || log "Pokemon list pull failed - keeping the old one"
+
 log "rebuilding the index"
 node scripts/build-index.mjs
 
@@ -51,13 +56,13 @@ pnpm test >/dev/null
 pnpm check >/dev/null
 pnpm build >/dev/null
 
-if git diff --quiet -- data/yuyutei.json data/index.json; then
+if git diff --quiet -- data/yuyutei.json data/index.json data/pokemon.json; then
   log "no price movement - nothing to publish"
   exit 0
 fi
 
 log "committing and pushing"
-git add data/yuyutei.json data/index.json
+git add data/yuyutei.json data/index.json data/pokemon.json
 git -c user.name="nightly" -c user.email="nightly@localhost" \
     commit -m "data: nightly Yuyu-tei refresh (local)"
 git pull --rebase --autostash origin main

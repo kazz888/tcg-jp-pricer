@@ -7,6 +7,15 @@ import { useEffect, useMemo, useRef } from 'react'
 import type { Card, Coverage } from '../lib/types'
 import { search, type SearchEntry } from './matching'
 import { baseName, hasArt, hasRarity, setOf, yen } from './model'
+import type { SyncStatus } from './sync'
+
+const BACKUP_LABEL: Record<SyncStatus, string> = {
+  off: 'Backup off',
+  saving: 'Saving…',
+  saved: 'Backed up',
+  failed: 'Not saved',
+  'bad-key': 'Wrong key',
+}
 
 // Set codes hidden from the filter row at the top of the search screen.
 // ST = starter decks: 28 chips for products whose singles are rarely bought
@@ -87,6 +96,8 @@ export default function SearchView({
   recent,
   onPick,
   onOpenCoverage,
+  backupStatus,
+  onBackup,
 }: {
   entries: SearchEntry[]
   coverage: Coverage
@@ -97,6 +108,8 @@ export default function SearchView({
   recent: Card[]
   onPick: (c: Card) => void
   onOpenCoverage: () => void
+  backupStatus: SyncStatus
+  onBackup: () => void
 }) {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -136,6 +149,14 @@ export default function SearchView({
     <>
       <header className="topbar">
         <div className="topbar__title">One Piece · price check</div>
+        <button
+          type="button"
+          className={backupStatus === 'saved' ? 'btn btn--ghost btn--icon' : 'btn btn--ghost btn--icon backup--warn'}
+          onClick={onBackup}
+          aria-label={`Backup: ${BACKUP_LABEL[backupStatus]}. Tap to set the backup key.`}
+        >
+          {BACKUP_LABEL[backupStatus]}
+        </button>
         <button type="button" className="btn btn--ghost btn--icon" onClick={onOpenCoverage}>
           Coverage
         </button>
