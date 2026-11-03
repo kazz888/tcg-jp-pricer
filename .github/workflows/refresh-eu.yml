@@ -85,8 +85,10 @@ jobs:
             const d = require("/tmp/apify-me.json").data ?? {};
             const p = d.plan ?? {};
             console.log(`user=${d.username} plan=${p.id} monthlyCreditUsd=${p.monthlyUsageCreditsUsd}`);
+            // The pull runs with --row-cap 100000, so it cannot detect the 5-row cap itself.
             if (p.id === "FREE") {
-              console.log("::warning::Apify is on the FREE plan, which caps every actor run at 5 rows. The pull below will be refused as truncated.");
+              console.log("::error::Apify is on the FREE plan, which caps every actor run at 5 rows (49 expansions -> 245 rows). Renew the Starter plan before pulling.");
+              process.exit(1);
             }
           '
 

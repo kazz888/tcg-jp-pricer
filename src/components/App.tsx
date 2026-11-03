@@ -5,12 +5,14 @@
 // explicit empty state - never a screen of zeroes.
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import type { Card } from '../lib/types'
 import BookmarksView from './BookmarksView'
 import CardView from './CardView'
 import CollectionView from './CollectionView'
 import CoverageView from './CoverageView'
 import GapsView from './GapsView'
+import Menu, { type MenuItem } from './Menu'
 import SealedView from './SealedView'
 import SearchView from './SearchView'
 import { keyOf, readBookmarks, toggleKey, writeBookmarks } from './bookmarks'
@@ -61,11 +63,19 @@ function writeRecent(keys: string[]): void {
   }
 }
 
+// Slides between screens where the browser supports view transitions; an
+// instant swap everywhere else, and always when reduced motion is asked for.
+function withTransition(update: () => void, dir: 'forward' | 'back') {
+  if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) return update()
+  document.documentElement.dataset.nav = dir
+  document.startViewTransition(() => flushSync(update))
+}
+
 function NoData({ loaded }: { loaded: LoadedIndex }) {
   return (
     <>
       <header className="topbar">
-        <div className="topbar__title">One Piece · price check</div>
+        <div className="topbar__title">Price check</div>
       </header>
       <div className="scroll pad stack">
         <div className="banner banner--warn">
@@ -178,21 +188,25 @@ export default function App() {
   useEffect(() => {
     const onPop = (e: PopStateEvent) => {
       const s = e.state as { view?: View } | null
-      setView(s?.view ?? { name: 'search' })
+      const update = () => setView(s?.view ?? { name: 'search' })
+      // iOS already animated its own back-swipe; a second slide would stutter.
+      if (e.hasUAVisualTransition) update()
+      else withTransition(update, 'back')
     }
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
   const go = useCallback((next: View) => {
-    setView(next)
+    withTransition(() => setView(next), 'forward')
     try {
-      if (next.name === 'search') history.pushState({ view: next }, '')
-      else history.pushState({ view: next }, '')
+      history.pushState({ view: next }, '')
     } catch {
       /* history is a nicety; navigation still works without it */
     }
   }, [])
+
+  const menuRef = useRef<HTMLDialogElement>(null)
 
   const back = useCallback(() => {
     try {
@@ -340,12 +354,24 @@ export default function App() {
         setSetFilter={setSetFilter}
         recent={recent}
         onPick={pick}
-        onOpenCoverage={() => go({ name: 'coverage' })}
-        backupStatus={backupStatus}
-        onBackup={setBackupKey}
+        onOpenMenu={() => menuRef.current?.showModal()}
+        menuAlert={backupStatus === 'failed' || backupStatus === 'bad-key'}
       />
     )
   }
+
+  // Sealed is hidden when there are no rows - SealedItem in ../lib/types
+  // requires an absent array to behave exactly like an empty one. Collection is
+  // always shown: it is the only way in to add a Pokemon card.
+  const menuItems: MenuItem[] = [
+    { glyph: '★', label: 'Bookmarks', count: bookmarked.length, onSelect: () => go({ name: 'bookmarks' }) },
+    { glyph: '▲', label: 'Cheaper in Japan', onSelect: () => go({ name: 'gaps' }) },
+    ...(sealed.length > 0
+      ? [{ glyph: '▦', label: 'Boxes & packs', count: sealed.length, onSelect: () => go({ name: 'sealed' }) }]
+      : []),
+    { glyph: '▤', label: 'My collection', count: owned.length, onSelect: () => go({ name: 'collection' }) },
+    { glyph: '◷', label: 'Price data', onSelect: () => go({ name: 'coverage' }) },
+  ]
 
   return (
     <div className="app">
@@ -359,80 +385,11 @@ export default function App() {
       ) : null}
       {!online && hasData ? (
         <div className="pad" style={{ paddingBottom: 0 }}>
-          <span className="offline-pill offline-pill--off">Offline · using baked prices</span>
+          <span className="offline-pill offline-pill--off">Offline, prices still work</span>
         </div>
       ) : null}
       {screen}
-      {/* The watchlist is a plan-ahead screen, so it is not allowed to compete
-          with the search field. It docks in the thumb zone of the search
-          screen only, the same place the keypad occupies on a card. */}
-      {hasData && view.name === 'search' ? (
-        <nav className="navdock" aria-label="Other screens">
-          {/* Your own list comes first when it exists: the whole point of
-              bookmarking is that these matter more to you than the algorithmic
-              watchlist below. Hidden when empty so it never sits there as a
-              dead entry. */}
-          {bookmarkKeys.length > 0 ? (
-          <button type="button" className="navdock__btn" onClick={() => go({ name: 'bookmarks' })}>
-            <span className="navdock__glyph" aria-hidden="true">
-              ★
-            </span>
-            <span className="navdock__text">
-              <span className="navdock__title">Bookmarks · {bookmarked.length}</span>
-              <span className="navdock__sub">Your hunting list, ranked by what you would gain</span>
-            </span>
-            <span className="navdock__chev" aria-hidden="true">
-              ›
-            </span>
-          </button>
-          ) : null}
-          <button type="button" className="navdock__btn" onClick={() => go({ name: 'gaps' })}>
-            <span className="navdock__glyph" aria-hidden="true">
-              ▲
-            </span>
-            <span className="navdock__text">
-              <span className="navdock__title">Watchlist</span>
-              <span className="navdock__sub">Biggest Japan → Europe gaps · plan before you land</span>
-            </span>
-            <span className="navdock__chev" aria-hidden="true">
-              ›
-            </span>
-          </button>
-          {/* Sealed is a separate catalogue judged a different way (against
-              Europe, not Yuyu-tei), so it gets its own entry rather than being
-              mixed into the singles search. The subtitle says which, before the
-              user has tapped anything. Hidden entirely when there are no rows -
-              SealedItem in ../lib/types requires an absent array to behave
-              exactly like an empty one. */}
-          {sealed.length > 0 ? (
-          <button type="button" className="navdock__btn" onClick={() => go({ name: 'sealed' })}>
-            <span className="navdock__glyph" aria-hidden="true">
-              ▦
-            </span>
-            <span className="navdock__text">
-              <span className="navdock__title">Sealed · {sealed.length}</span>
-              <span className="navdock__sub">Booster boxes &amp; packs · judged against Europe</span>
-            </span>
-            <span className="navdock__chev" aria-hidden="true">
-              ›
-            </span>
-          </button>
-          ) : null}
-          {/* Always shown: it is the only way in to add a Pokemon card. */}
-          <button type="button" className="navdock__btn" onClick={() => go({ name: 'collection' })}>
-            <span className="navdock__glyph" aria-hidden="true">
-              ▤
-            </span>
-            <span className="navdock__text">
-              <span className="navdock__title">Collection · {owned.length}</span>
-              <span className="navdock__sub">Cards you bought · One Piece &amp; Pokémon</span>
-            </span>
-            <span className="navdock__chev" aria-hidden="true">
-              ›
-            </span>
-          </button>
-        </nav>
-      ) : null}
+      {hasData ? <Menu dialogRef={menuRef} items={menuItems} backupStatus={backupStatus} onBackup={setBackupKey} /> : null}
     </div>
   )
 }

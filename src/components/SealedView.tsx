@@ -20,9 +20,9 @@
 // out lives at the data boundary in model.tsx (toSealed fails closed on an
 // unrecognised kind), not here.
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Fx } from '../lib/types'
-import Keypad from './Keypad'
+import { AskDock } from './Keypad'
 import {
   eur,
   sealedGroupKey,
@@ -60,22 +60,14 @@ const BANDS: Array<{
   rule: string
 }> = [
   // Every label names EUROPE, because that is the only thing being compared.
-  // A bare "STEAL" would read as an absolute judgement, and nothing on this
+  // A bare "Steal" would read as an absolute judgement, and nothing on this
   // screen knows the Japanese market price. See SealedItem in ../lib/types.
-  { max: 0.35, band: 'steal', label: 'WELL UNDER EU', glyph: '▼▼', rule: 'under 35% of the European trend price' },
-  { max: 0.55, band: 'good', label: 'UNDER EU', glyph: '▼', rule: '35–55% of the European trend price' },
-  { max: 0.75, band: 'fair', label: 'THIN VS EU', glyph: '●', rule: '55–75% of the European trend price' },
-  { max: 1.0, band: 'high', label: 'NO ROOM VS EU', glyph: '▲', rule: '75–100% of the European trend price' },
-  { max: Infinity, band: 'over', label: 'OVER EU VALUE', glyph: '▲▲', rule: 'above the European trend price' },
+  { max: 0.35, band: 'steal', label: 'Well under Europe', glyph: '▼▼', rule: 'under 35% of the European trend price' },
+  { max: 0.55, band: 'good', label: 'Under Europe', glyph: '▼', rule: '35–55% of the European trend price' },
+  { max: 0.75, band: 'fair', label: 'Thin vs Europe', glyph: '●', rule: '55–75% of the European trend price' },
+  { max: 1.0, band: 'high', label: 'No room vs Europe', glyph: '▲', rule: '75–100% of the European trend price' },
+  { max: Infinity, band: 'over', label: 'Over Europe', glyph: '▲▲', rule: 'above the European trend price' },
 ]
-
-const BAND_CLASS: Record<string, string> = {
-  steal: 'verdict verdict--steal',
-  good: 'verdict verdict--good',
-  fair: 'verdict verdict--fair',
-  high: 'verdict verdict--high',
-  over: 'verdict verdict--over',
-}
 
 export interface SealedJudged {
   kind: 'judged'
@@ -214,11 +206,11 @@ function JapaneseReference({ p, askJpy }: { p: SealedProduct; askJpy: number }) 
     )
   }
   return (
-    <section className="panel sealed-nojp" aria-label="How sealed is priced">
-      <div className="panel__label">How this is judged</div>
+    <section className="panel" aria-label="How sealed is priced">
+      <div className="panel__label">Japan</div>
       <p className="sealed-nojp__msg">
-        Sealed is measured against <strong>Europe only</strong>, on purpose. A Japanese booster box costs about the
-        same yen everywhere, so a Japanese average adds little against a gap this wide.
+        No Japanese reference, on purpose: a box costs about the same yen everywhere, so sealed is judged against{' '}
+        <strong>Europe only</strong>.
       </p>
     </section>
   )
@@ -251,7 +243,7 @@ function SealedRow({
         <span className="sealed-row__meta">
           {p.setCode ? <span className="tag">{p.setCode}</span> : null}
           {n.region ? <span className="tag tag--none">{n.region}</span> : null}
-          {collides > 1 ? <span className="tag tag--ambiguous">{collides} products · same set &amp; kind</span> : null}
+          {collides > 1 ? <span className="tag tag--ambiguous">{collides} look alike</span> : null}
         </span>
         <span className="sr-only">
           {sealedKindLabel(p.kind)}.
@@ -280,30 +272,19 @@ function SealedDetail({
   onBack: () => void
 }) {
   const [ask, setAsk] = useState('')
-  const [padOpen, setPadOpen] = useState(true)
-  const verdictRef = useRef<HTMLDivElement>(null)
 
   // A new product must never inherit the previous product's asking price.
   useEffect(() => {
     setAsk('')
   }, [p.productId])
 
-  useEffect(() => {
-    if (ask.length === 1) verdictRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-  }, [ask])
-
-  const askJpy = parseAsk(ask)
-  const v = judgeSealed(p, askJpy, fx)
+  const v = judgeSealed(p, parseAsk(ask), fx)
   const n = sealedName(p.name)
-
-  const pushDigits = (d: string) => setAsk((prev) => (prev + d).replace(/^0+(?=\d)/, '').slice(0, 9))
-  const backspace = () => setAsk((prev) => prev.slice(0, -1))
-  const clear = () => setAsk('')
 
   return (
     <>
       <header className="topbar">
-        <button type="button" className="btn btn--ghost btn--icon" onClick={onBack} aria-label="Back to the sealed list">
+        <button type="button" className="btn btn--ghost btn--icon" onClick={onBack} aria-label="Back to boxes and packs">
           ←
         </button>
         <div className="topbar__title">{sealedKindLabel(p.kind)}</div>
@@ -324,172 +305,84 @@ function SealedDetail({
           <div className="sealed-detail__exp">{p.expansionName}</div>
         </div>
 
-        {siblings.length > 1 ? (
-          <div className="pad" style={{ paddingBottom: 0 }}>
-            <div className="banner banner--warn">
-              <div className="banner__title">
-                {siblings.length} sealed products share this set and kind
-              </div>
-              Their prices are not interchangeable. Read the box in your hand against these names before you trust any
-              figure — we will not pick one for you:
-              <ul className="sealed-siblings">
-                {siblings.map((s) => (
-                  <li key={s.productId}>
-                    <span className="mono">{s.trendEur !== null && s.trendEur > 0 ? eur(s.trendEur) : 'no price'}</span>{' '}
-                    {sealedName(s.name).full}
-                    {s.productId === p.productId ? <strong> — this one</strong> : null}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ) : null}
-
-        <section className="ask" aria-label="Shop asking price">
-          <div className="ask__label">Shop is asking</div>
-          <div className="ask__field">
-            <span className="ask__yen" aria-hidden="true">
-              ¥
-            </span>
-            <input
-              className="ask__input"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              type="text"
-              autoComplete="off"
-              enterKeyHint="done"
-              placeholder="0"
-              aria-label="Shop asking price in yen"
-              value={ask}
-              onChange={(e) =>
-                setAsk(e.target.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 9))
-              }
-            />
-            {ask ? (
-              <button type="button" className="ask__clear" onClick={clear} aria-label="Clear asking price">
-                ×
-              </button>
-            ) : null}
-          </div>
-        </section>
-
-        {v.kind === 'no-reference' ? (
-          <div className="verdict verdict--idle" role="status" ref={verdictRef}>
-            <div className="verdict__headline">
-              <span className="verdict__glyph" aria-hidden="true">
-                ?
-              </span>
-              <span>No verdict yet</span>
-            </div>
-            {p.trendEur !== null && p.trendEur > 0 ? (
-              <div className="verdict__delta mono">Europe · trend {eur(p.trendEur)}</div>
-            ) : null}
-            <div className="verdict__explain">{v.reason}</div>
-          </div>
-        ) : (
-          <div className={BAND_CLASS[v.band]} role="status" aria-live="polite" ref={verdictRef}>
-            <div className="verdict__headline">
-              <span className="verdict__glyph" aria-hidden="true">
-                {v.glyph}
-              </span>
-              <span>{v.label}</span>
-            </div>
-            {/* Both directions, because the two currencies are the whole point:
-                what the shop wants, in euro; what Europe pays, in yen. */}
-            <div className="verdict__delta mono">
-              {yen(v.askJpy)} ≈ {eur(v.askEur)}
-            </div>
-            <div className="verdict__delta mono">
-              Europe {eur(v.trendEur)} ≈ {yen(v.trendJpy)}
-            </div>
-            <div className="verdict__delta mono">
-              {sharePct(v.ratio)} of European value · {signedYen(v.deltaJpy)}
-            </div>
-            <div className="verdict__explain">
-              Measured against <strong>Europe</strong>. “{v.label}” means {v.rule}.
-            </div>
-            <div className="verdict__floor">
-              Cardmarket trend is a <strong>gross</strong> sale price. Commission, postage on a heavy box and the wait
-              for a buyer all come out of it, so the usable ceiling is well under 100%.
-            </div>
-          </div>
-        )}
-
-        <JapaneseReference p={p} askJpy={askJpy} />
-
         <section className="panel" aria-label="European prices">
-          <div className="panel__label">Europe · Cardmarket</div>
+          <div className="panel__label">Europe</div>
           {p.trendEur !== null && p.trendEur > 0 ? (
             <>
               <div className="eu__single-value">{eur(p.trendEur)}</div>
               <div className="eu__sub">
-                Cardmarket trend — the headline figure
-                {fx.jpyPerEur > 0 ? ` · ≈ ${yen(p.trendEur * fx.jpyPerEur)}` : ''}
+                Cardmarket trend{fx.jpyPerEur > 0 ? `, about ${yen(p.trendEur * fx.jpyPerEur)}` : ''}
               </div>
             </>
           ) : (
-            <p className="eu__msg">
-              <strong>No trend price on Cardmarket for this product.</strong> That is a hole in the data, not a
-              worthless product.
+            <p className="eu__msg eu__msg--warn">
+              No Cardmarket trend price for this product. A hole in the data, not a worthless box.
             </p>
           )}
-          <div className="cand__prices" style={{ marginTop: 12 }}>
-            <Money label="Trend" value={p.trendEur} />
-            <Money label="Low @ snapshot" value={p.lowEur} />
-            <Money label="7-day avg" value={p.avg7Eur} />
+          <div className="cand__prices" style={{ marginTop: 10 }}>
+            <Money label="Low" value={p.lowEur} />
+            <Money label="7-day" value={p.avg7Eur} />
           </div>
           {/* Same provenance caveat the card screen carries: the price guide is
               published once a day, and "From" on the live Cardmarket page is the
-              cheapest ACTIVE listing, which drifts as copies sell or undercut. */}
+              cheapest ACTIVE listing, which drifts as copies sell or undercut.
+              Trend is a GROSS sale price: commission, postage on a heavy box and
+              the wait for a buyer all come out of it. */}
           <div className="cand__stale">
-            Trend is the headline. <strong>Low</strong> is a once-a-day snapshot from the price guide, not live —
-            Cardmarket’s “From” moves during the day.
+            Before fees and postage. Low is from the daily guide, not live
+            {fx.jpyPerEur > 0 ? `. €1 = ¥${Math.round(fx.jpyPerEur)}` : ''}.
           </div>
-          {fx.jpyPerEur > 0 ? (
-            <div className="jp-price__note" style={{ marginTop: 8 }}>
-              Converted at the baked rate €1 = ¥{Math.round(fx.jpyPerEur)} ({fx.source}
-              {fx.date ? `, ${fx.date}` : ''}).
-            </div>
-          ) : null}
         </section>
 
+        {siblings.length > 1 ? (
+          <section className="panel" aria-label="Products that share this set and kind">
+            <div className="panel__label">{siblings.length} products share this set and kind</div>
+            <p className="eu__msg eu__msg--warn">Read the box in your hand against these names.</p>
+            <ul className="sealed-siblings">
+              {siblings.map((s) => (
+                <li key={s.productId}>
+                  <span className="mono">{s.trendEur !== null && s.trendEur > 0 ? eur(s.trendEur) : 'no price'}</span>{' '}
+                  {sealedName(s.name).full}
+                  {s.productId === p.productId ? <strong> (this one)</strong> : null}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        <JapaneseReference p={p} askJpy={parseAsk(ask)} />
+
         <div className="foot">
-          Cardmarket expansion <code>{p.expansionName}</code> · id <code>{p.expansionId}</code>
-          {p.setCode ? (
-            <>
-              {' '}
-              · set <code>{p.setCode}</code>
-            </>
-          ) : (
-            <>
-              {' '}
-              · no set code is mapped to this expansion, so the box name is the only identity we have for it.
-            </>
-          )}
-          <br />
-          <br />
-          Full Cardmarket name: <code>{n.full}</code>
+          {p.setCode ? null : 'No set code is mapped to this expansion, so the box name is its only identity. '}
           {p.productUrl ? (
-            <>
-              <br />
-              <a href={p.productUrl} rel="noreferrer noopener" target="_blank" style={{ color: 'var(--blue)' }}>
-                Cardmarket page
-              </a>{' '}
-              (needs signal)
-            </>
+            <a href={p.productUrl} rel="noreferrer noopener" target="_blank">
+              Open on Cardmarket
+            </a>
           ) : null}
         </div>
       </div>
 
-      <div className="keypad-dock">
-        <div className="keypad-dock__bar">
-          <span>Asking price · yen</span>
-          <button type="button" className="keypad-dock__toggle" onClick={() => setPadOpen((x) => !x)}>
-            {padOpen ? 'Hide pad' : 'Show pad'}
-          </button>
+      <AskDock ask={ask} onAsk={setAsk}>
+        <div className={v.kind === 'judged' ? `verdict verdict--${v.band}` : 'verdict verdict--idle'} role="status" aria-live="polite">
+          {v.kind === 'judged' ? (
+            <>
+              <span className="verdict__glyph" aria-hidden="true">
+                {v.glyph}
+              </span>
+              <span className="verdict__label">{v.label}</span>
+              <span className="verdict__amount mono">{sharePct(v.ratio)}</span>
+              {/* Both directions, because the two currencies are the whole point:
+                  what the shop wants, in euro; what Europe pays, in yen. */}
+              <span className="verdict__delta mono">
+                Shop ≈ {eur(v.askEur)}, Europe {eur(v.trendEur)} ({signedYen(v.deltaJpy)})
+              </span>
+              <span className="verdict__delta">Means {v.rule}.</span>
+            </>
+          ) : (
+            <span className="verdict__idle">{v.reason}</span>
+          )}
         </div>
-        {padOpen ? <Keypad onDigits={pushDigits} onBackspace={backspace} onClear={clear} /> : null}
-      </div>
+      </AskDock>
     </>
   )
 }
@@ -533,15 +426,6 @@ export default function SealedView({
 
   const boxes = useMemo(() => sealed.filter((s) => s.kind === 'booster_box').length, [sealed])
   const packs = useMemo(() => sealed.filter((s) => s.kind === 'booster_pack').length, [sealed])
-  const withSetCode = useMemo(() => sealed.filter((s) => s.setCode).length, [sealed])
-  const priced = useMemo(() => sealed.filter((s) => s.trendEur !== null && s.trendEur > 0).length, [sealed])
-  // Derived, never hardcoded to 0. The day a Japanese sealed source lands, this
-  // tile and the banner below it start telling the truth on their own instead of
-  // quietly going stale.
-  const sets = useMemo(
-    () => new Set(sealed.map((s) => s.setCode).filter((c): c is string => !!c)).size,
-    [sealed],
-  )
 
   if (open) {
     return (
@@ -560,65 +444,39 @@ export default function SealedView({
         <button type="button" className="btn btn--ghost btn--icon" onClick={onBack} aria-label="Back to search">
           ←
         </button>
-        <div className="topbar__title">Sealed · boxes &amp; packs</div>
+        <div className="topbar__title">Boxes &amp; packs</div>
       </header>
 
       <div className="scroll">
-        {/* Neutral, not apologetic: Europe-only is the chosen design for sealed,
-            not a hole. Still stated up front, because the card screen judges
-            against Japan and the two screens must not be confused. */}
-        {sealed.length > 0 ? (
-        <div className="pad" style={{ paddingBottom: 0 }}>
-          <div className="banner">
-            <div className="banner__title">Judged against Europe</div>
-            Cards are judged against <strong>Yuyu-tei</strong>, a Japanese shop. Sealed is judged against{' '}
-            <strong>Cardmarket</strong> instead: a Japanese booster box costs much the same yen anywhere, while
-            Europe pays several times that, so the European price is the number that decides it.
-          </div>
-        </div>
-        ) : null}
-
         {sealed.length === 0 ? (
           <div className="empty">
-            <strong>No sealed product in this build</strong>
-            The index carries no sealed rows. That is a pipeline that has not run, not a shop with nothing in it —
-            there is nothing here to price against, so nothing is shown.
+            <strong>No boxes or packs in this build</strong>
+            The sealed pipeline has not run, so there is nothing to price against. That is missing data, not a shop
+            with nothing in it.
           </div>
         ) : (
           <>
-            <div className="cov-grid">
-              <div className="cov-stat">
-                <div className="cov-stat__n mono">{boxes}</div>
-                <div className="cov-stat__l">Booster boxes</div>
-              </div>
-              <div className="cov-stat">
-                <div className="cov-stat__n mono">{packs}</div>
-                <div className="cov-stat__l">Booster packs</div>
-              </div>
-              <div className="cov-stat">
-                <div className="cov-stat__n mono">{priced}</div>
-                <div className="cov-stat__l">With a European price</div>
-              </div>
-              <div className="cov-stat">
-                <div className="cov-stat__n mono">{sets}</div>
-                <div className="cov-stat__l">Sets covered</div>
+            {/* Neutral, not apologetic: Europe-only is the chosen design for
+                sealed, not a hole. Still stated up front, because the card
+                screen judges against Japan and the two must not be confused. */}
+            <div className="pad" style={{ paddingBottom: 4 }}>
+              <div className="banner banner--info">
+                Judged against <strong>Cardmarket</strong>, not Yuyu-tei: a box costs much the same yen anywhere in
+                Japan, and Europe pays several times that.
               </div>
             </div>
 
-            <div className="section-label">Sort</div>
             <div className="chips" role="group" aria-label="Sort order">
               <button type="button" className="chip" aria-pressed={sort === 'price'} onClick={() => setSort('price')}>
-                European price
+                Dearest first
               </button>
               <button type="button" className="chip" aria-pressed={sort === 'name'} onClick={() => setSort('name')}>
-                Set &amp; name
+                By set
               </button>
             </div>
-
-            <div className="section-label">Show</div>
             <div className="chips" role="group" aria-label="Filter by kind">
               <button type="button" className="chip" aria-pressed={kindFilter === null} onClick={() => setKindFilter(null)}>
-                Everything
+                All
               </button>
               <button
                 type="button"
@@ -626,7 +484,7 @@ export default function SealedView({
                 aria-pressed={kindFilter === 'booster_box'}
                 onClick={() => setKindFilter('booster_box')}
               >
-                Boxes ({boxes})
+                Boxes <span className="mono">{boxes}</span>
               </button>
               <button
                 type="button"
@@ -634,13 +492,8 @@ export default function SealedView({
                 aria-pressed={kindFilter === 'booster_pack'}
                 onClick={() => setKindFilter('booster_pack')}
               >
-                Packs ({packs})
+                Packs <span className="mono">{packs}</span>
               </button>
-            </div>
-
-            <div className="section-label">
-              {rows.length} product{rows.length === 1 ? '' : 's'}
-              {sort === 'price' ? ' · dearest in Europe first' : ' · by set'}
             </div>
 
             <ul className="results">
@@ -655,12 +508,8 @@ export default function SealedView({
             </ul>
 
             <div className="foot">
-              Boxes and packs only — no cases, no starter decks, no accessories. A “Booster Box Case” holds twelve
-              boxes and costs accordingly, so it is excluded rather than shown next to a single box.
-              <br />
-              <br />
-              {withSetCode} of {sealed.length} rows carry a mapped set code; the rest are identified by the box name
-              alone, which is what is printed on the box anyway.
+              Boxes and packs only. A booster box case holds twelve boxes and costs accordingly, so cases are left
+              out rather than shown next to a single box.
             </div>
           </>
         )}

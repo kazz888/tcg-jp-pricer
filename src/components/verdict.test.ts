@@ -125,28 +125,28 @@ test('ratio exactly 0.70 is STEAL (threshold is an inclusive upper bound)', () =
   const v = judged(judge(card(REFERENCE), 700))
   assert.equal(v.ratio, 0.7)
   assert.equal(v.band, 'steal')
-  assert.equal(v.label, 'STEAL')
+  assert.equal(v.label, 'Steal')
 })
 
 test('ratio exactly 0.92 is GOOD, not FAIR', () => {
   const v = judged(judge(card(REFERENCE), 920))
   assert.equal(v.ratio, 0.92)
   assert.equal(v.band, 'good')
-  assert.equal(v.label, 'GOOD PRICE')
+  assert.equal(v.label, 'Good price')
 })
 
 test('ratio exactly 1.08 is FAIR, not HIGH', () => {
   const v = judged(judge(card(REFERENCE), 1080))
   assert.equal(v.ratio, 1.08)
   assert.equal(v.band, 'fair')
-  assert.equal(v.label, 'FAIR / MARKET')
+  assert.equal(v.label, 'Market price')
 })
 
 test('ratio exactly 1.35 is HIGH, not OVER', () => {
   const v = judged(judge(card(REFERENCE), 1350))
   assert.equal(v.ratio, 1.35)
   assert.equal(v.band, 'high')
-  assert.equal(v.label, 'HIGH')
+  assert.equal(v.label, 'High')
 })
 
 test('one yen above each boundary crosses into the next band', () => {

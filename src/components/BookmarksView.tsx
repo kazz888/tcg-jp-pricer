@@ -61,7 +61,7 @@ function Ranked({ row, onPick, onRemove }: { row: GapRow; onPick: (c: Card) => v
         <span className="gap-row__meta">
           {hasRarity(card.rarity) ? <span className="tag">{card.rarity}</span> : null}
           {card.variant ? <span className="tag tag--variant">{card.variant}</span> : null}
-          {!card.inStock ? <span className="tag tag--oos">Yuyu-tei OOS</span> : null}
+          {!card.inStock ? <span className="tag tag--oos">Yuyu-tei sold out</span> : null}
           {row.guess ? <span className="tag tag--ambiguous">{row.guessNote}</span> : null}
         </span>
       </button>
@@ -94,7 +94,7 @@ function Unranked({ card, onPick, onRemove }: { card: Card; onPick: (c: Card) =>
         <span className="gap-row__meta">
           {hasRarity(card.rarity) ? <span className="tag">{card.rarity}</span> : null}
           {card.variant ? <span className="tag tag--variant">{card.variant}</span> : null}
-          {!card.inStock ? <span className="tag tag--oos">Yuyu-tei OOS</span> : null}
+          {!card.inStock ? <span className="tag tag--oos">Yuyu-tei sold out</span> : null}
         </span>
       </button>
       <button type="button" className="bm-remove" onClick={() => onRemove(card)} aria-label={`Remove ${card.code} from bookmarks`}>
@@ -147,37 +147,16 @@ export default function BookmarksView({
         {cards.length === 0 ? (
           <div className="empty">
             <strong>No bookmarks yet</strong>
-            Open any card and tap ★ to add it. This is your hunting list: it is ranked by the euro you would gain,
-            and it works offline in a shop.
+            Open any card and tap ☆ to save it here, ranked by what you would gain in Europe.
           </div>
         ) : (
           <>
-            <div className="pad" style={{ paddingBottom: 0 }}>
-              <div className="cov-grid">
-                <div className="cov-stat">
-                  <div className="cov-stat__n mono">{cards.length}</div>
-                  <div className="cov-stat__l">Bookmarked</div>
-                </div>
-                <div className="cov-stat">
-                  <div className="cov-stat__n mono">{winners}</div>
-                  <div className="cov-stat__l">Worth more in Europe</div>
-                </div>
-                <div className={unranked.length ? 'cov-stat cov-stat--none' : 'cov-stat'}>
-                  <div className="cov-stat__n mono">{unranked.length}</div>
-                  <div className="cov-stat__l">No European price</div>
-                </div>
-              </div>
-              {best ? (
-                <div className="foot">
-                  Sorted by the yen you would gain. Best on this list is{' '}
-                  <span className="mono">{best.card.code}</span> at {signedYen(best.gapJpy)}.
-                </div>
-              ) : null}
-            </div>
-
             {ranked.length ? (
               <>
-                <div className="section-label">Ranked · {ranked.length}</div>
+                <div className="section-label mono">
+                  {winners} of {cards.length} worth more in Europe
+                  {best && best.gapJpy > 0 ? `, best ${signedYen(best.gapJpy)}` : ''}
+                </div>
                 <ul className="results">
                   {ranked.map((r) => (
                     <Ranked key={`${r.card.setBucket}-${r.card.cardId}`} row={r} onPick={onPick} onRemove={onRemove} />
@@ -186,18 +165,15 @@ export default function BookmarksView({
               </>
             ) : null}
 
+            {/* Kept, not dropped: you chose these. The reason is on each row. */}
             {unranked.length ? (
               <>
-                <div className="section-label">No European price · {unranked.length}</div>
+                <div className="section-label mono">No European price ({unranked.length})</div>
                 <ul className="results">
                   {unranked.map((c) => (
                     <Unranked key={`${c.setBucket}-${c.cardId}`} card={c} onPick={onPick} onRemove={onRemove} />
                   ))}
                 </ul>
-                <div className="foot">
-                  These are bookmarked but cannot be ranked — the reason is on each row. They are kept here rather
-                  than dropped, because you chose them.
-                </div>
               </>
             ) : null}
           </>

@@ -212,7 +212,7 @@ function GapRowItem({ row, onPick }: { row: GapRow; onPick: (c: Card) => void })
           {row.guess ? <span className="tag tag--guess">Guess · not verified</span> : null}
           {card.variant ? <span className="tag tag--variant">{card.variant}</span> : null}
           {hasRarity(card.rarity) ? <span className="tag">{card.rarity}</span> : null}
-          {!card.inStock ? <span className="tag tag--oos">Yuyu-tei OOS</span> : null}
+          {!card.inStock ? <span className="tag tag--oos">Yuyu-tei sold out</span> : null}
         </span>
 
         <span className="sr-only">
@@ -297,18 +297,11 @@ export default function GapsView({
     return best
   }, [base])
 
-  const caption =
-    sort === 'abs'
-      ? loudest
-        ? `Sorted by the yen you actually gain, not by percentage. The loudest percentage in this build is ${pct(
-            loudest.ratio,
-          )} — and it is ${signedYen(loudest.gapJpy)} on a ${yen(loudest.card.jpySell)} card.`
-        : 'Sorted by the yen you actually gain, not by percentage: a huge percentage on a cheap card is still small money.'
-      : loudest
-        ? `Sorted by percentage. Read the yen beside it before you act — the top row is a ${yen(
-            loudest.card.jpySell,
-          )} card and the whole gain is ${signedYen(loudest.gapJpy)}.`
-        : 'Sorted by percentage. Read the yen beside it before you act.'
+  const caption = loudest
+    ? `Check the yen too: the biggest percentage, ${pct(loudest.ratio)}, is ${signedYen(loudest.gapJpy)} on a ${yen(
+        loudest.card.jpySell,
+      )} card.`
+    : 'Check the yen too: a big percentage on a cheap card is still small money.'
 
   return (
     <>
@@ -316,70 +309,30 @@ export default function GapsView({
         <button type="button" className="btn btn--ghost btn--icon" onClick={onBack} aria-label="Back to search">
           ←
         </button>
-        <div className="topbar__title">Watchlist · hunt before you land</div>
+        <div className="topbar__title">Cheaper in Japan</div>
       </header>
 
       <div className="scroll">
-        <div className="pad" style={{ paddingBottom: 0 }}>
+        <div className="pad" style={{ paddingBottom: 4 }}>
           <div className="banner banner--warn">
             <div className="banner__title">A gap is not profit</div>
-            The euro figure is Cardmarket <strong>trend</strong> — a gross sale price, before commission, postage and
-            the wait for a buyer. The yen figure is <strong>Yuyu-tei&rsquo;s</strong> asking price, not the price of
-            the shop standing in front of you. Treat every row as a lead to check, not a number to trust.
+            Yuyu-tei&rsquo;s price against the Cardmarket <strong>trend</strong>, before fees, postage and the wait
+            for a buyer. Treat each row as a lead to check.
           </div>
         </div>
 
-        <div className="cov-grid">
-          <div className="cov-stat">
-            <div className="cov-stat__n mono">{winners.toLocaleString()}</div>
-            <div className="cov-stat__l">Dearer in Europe</div>
-          </div>
-          <div className="cov-stat">
-            <div className="cov-stat__n mono">{base.length.toLocaleString()}</div>
-            <div className="cov-stat__l">Ranked · verified EU price</div>
-          </div>
-          <div className="cov-stat">
-            <div className="cov-stat__n mono">{bestJpy > 0 ? signedYen(bestJpy) : '—'}</div>
-            <div className="cov-stat__l">Best gap on one card</div>
-          </div>
-          <div className="cov-stat">
-            <div className="cov-stat__n mono">{notRanked.toLocaleString()}</div>
-            <div className="cov-stat__l">Not ranked · no safe EU price</div>
-          </div>
-        </div>
-
-        <div className="section-label">Sort</div>
-        <div className="chips" role="group" aria-label="Sort order">
+        <div className="chips" role="group" aria-label="Sort and filter">
           <button type="button" className="chip" aria-pressed={sort === 'abs'} onClick={() => setSort('abs')}>
-            Yen gained
+            Most yen
           </button>
           <button type="button" className="chip" aria-pressed={sort === 'pct'} onClick={() => setSort('pct')}>
-            Percentage
+            Biggest %
           </button>
-        </div>
-        <div className="gap-caption">{caption}</div>
-
-        <div className="section-label">Minimum Yuyu-tei price</div>
-        <div className="chips" role="group" aria-label="Minimum Japanese price">
-          {MIN_YEN_STEPS.map((v) => (
-            <button key={v} type="button" className="chip" aria-pressed={minYen === v} onClick={() => setMinYen(v)}>
-              {v === 0 ? 'Any price' : `≥ ${yen(v)}`}
-            </button>
-          ))}
-        </div>
-
-        <div className="section-label">Filters</div>
-        <div className="chips" role="group" aria-label="Filters">
-          <button
-            type="button"
-            className="chip"
-            aria-pressed={inStockOnly}
-            onClick={() => setInStockOnly((v) => !v)}
-          >
-            In stock only
+          <button type="button" className="chip" aria-pressed={inStockOnly} onClick={() => setInStockOnly((v) => !v)}>
+            In stock
           </button>
           <button type="button" className="chip" aria-pressed={showLosers} onClick={() => setShowLosers((v) => !v)}>
-            Show Europe-cheaper too
+            Europe cheaper too
           </button>
           {hasGuesses ? (
             <button
@@ -388,55 +341,61 @@ export default function GapsView({
               aria-pressed={includeGuesses}
               onClick={() => setIncludeGuesses((v) => !v)}
             >
-              Include best guesses ({pool.guessed.length})
+              Best guesses <span className="mono">{pool.guessed.length}</span>
             </button>
           ) : null}
         </div>
+        {sort === 'pct' ? <div className="gap-caption">{caption}</div> : null}
+
+        <div className="chips" role="group" aria-label="Minimum Yuyu-tei price">
+          {MIN_YEN_STEPS.map((v) => (
+            <button key={v} type="button" className="chip" aria-pressed={minYen === v} onClick={() => setMinYen(v)}>
+              {v === 0 ? 'Any price' : `From ${yen(v)}`}
+            </button>
+          ))}
+        </div>
 
         {includeGuesses && hasGuesses ? (
-          <div className="pad" style={{ paddingTop: 0, paddingBottom: 0 }}>
+          <div className="pad" style={{ paddingTop: 4, paddingBottom: 4 }}>
             <div className="banner banner--warn">
-              <div className="banner__title">{pool.guessed.length} guessed rows are now mixed in</div>
-              These cards are still <strong>ambiguous</strong>. Their euro price is the printing the price-order
-              matcher thinks is most likely — it is a likelihood, not a verification, and a wrong one can be 10x–50x
-              out. Every guessed row is marked and carries its reasoning. Open the card to see all of its printings.
+              <div className="banner__title">{pool.guessed.length} guessed rows mixed in</div>
+              Their euro price is the printing the matcher thinks most likely, and a wrong one can be 10x to 50x out.
+              Each one is marked.
             </div>
           </div>
         ) : null}
 
         {sets.length > 1 ? (
-          <>
-            <div className="section-label">Set</div>
-            <div className="chips" role="group" aria-label="Filter by set">
-              <button type="button" className="chip" aria-pressed={setFilter === null} onClick={() => setSetFilter(null)}>
-                All sets
+          <div className="chips" role="group" aria-label="Filter by set">
+            <button type="button" className="chip" aria-pressed={setFilter === null} onClick={() => setSetFilter(null)}>
+              All sets
+            </button>
+            {sets.map((s) => (
+              <button
+                key={s}
+                type="button"
+                className="chip"
+                aria-pressed={setFilter === s}
+                onClick={() => setSetFilter(setFilter === s ? null : s)}
+              >
+                {s}
               </button>
-              {sets.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  className="chip"
-                  aria-pressed={setFilter === s}
-                  onClick={() => setSetFilter(setFilter === s ? null : s)}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </>
+            ))}
+          </div>
         ) : null}
 
-        <div className="section-label">
-          {rows.length} card{rows.length === 1 ? '' : 's'}
-          {rows.length > shown.length ? ` · showing first ${shown.length}` : ''}
+        <div className="section-label mono">
+          {rows.length.toLocaleString()} {rows.length === 1 ? 'card' : 'cards'}
+          {rows.length > shown.length ? `, first ${shown.length} shown` : ''}
+          {bestJpy > 0 && sort === 'abs' ? `, best ${signedYen(bestJpy)}` : ''}
         </div>
 
         {shown.length === 0 ? (
           <div className="empty">
-            <strong>Nothing to hunt under these filters</strong>
+            <strong>Nothing to hunt with these filters</strong>
             {base.length === 0
               ? 'No card in this build has a single verified European printing, so there is nothing safe to rank. That is missing data, not a market with no gaps.'
-              : `Of the ${base.length.toLocaleString()} cards with a verified European price, ${winners.toLocaleString()} are dearer in Europe — none of them survives this combination of filters. Widen the minimum price or clear the set filter.`}
+              : `${winners.toLocaleString()} cards cost more in Europe, but none match these filters. Lower the minimum price or clear the set.`}
           </div>
         ) : (
           <ul className="results">
@@ -447,27 +406,17 @@ export default function GapsView({
         )}
 
         <div className="foot">
-          <strong>What is deliberately missing from this list.</strong>
-          <br />
-          {notRanked.toLocaleString()} of {cards.length.toLocaleString()} cards are not ranked, because one card code
-          is not one printing: base, parallel, super-parallel and signed prints share a code, and Cardmarket&rsquo;s
-          price rows carry no rarity field to tell them apart. Ranking those would mean picking a candidate at random
-          and calling the difference a gap.
+          {notRanked.toLocaleString()} of {cards.length.toLocaleString()} cards are left out: their code covers several
+          Cardmarket printings, and the price rows cannot tell them apart.
           {dearestUnranked && dearestUnranked.jpySell > 0 ? (
             <>
               {' '}
-              The dearest card missing from this list is <span className="mono">{dearestUnranked.code}</span> at{' '}
-              {yen(dearestUnranked.jpySell)}. The expensive end of this market is exactly the ambiguous end, so read
-              this list as the safe floor of what is worth hunting, never as its ceiling.
+              The dearest one missing is <span className="mono">{dearestUnranked.code}</span> at{' '}
+              {yen(dearestUnranked.jpySell)}, so read this list as the floor of what is worth hunting.
             </>
-          ) : null}
-          <br />
-          <br />
-          Every gap on this screen is one division by the FX rate, so the rate is named here rather than hidden:{' '}
-          {fx.jpyPerEur > 0 ? `€1 = ¥${Math.round(fx.jpyPerEur)}` : 'no rate baked in'}
-          {fx.source ? ` · ${fx.source}` : ''}
-          {fx.date ? ` · ${fx.date}` : ''}. A stale rate moves every row on this list by the same percentage.
-          Nothing here is fetched — it works in aeroplane mode, and it is exactly as old as the build.
+          ) : null}{' '}
+          Rate {fx.jpyPerEur > 0 ? `€1 = ¥${Math.round(fx.jpyPerEur)}` : 'not baked in'}
+          {fx.date ? ` (${fx.date})` : ''}.
         </div>
       </div>
     </>

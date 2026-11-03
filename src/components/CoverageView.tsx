@@ -33,7 +33,7 @@ export default function CoverageView({
         <button type="button" className="btn btn--ghost btn--icon" onClick={onBack} aria-label="Back to search">
           ←
         </button>
-        <div className="topbar__title">Coverage</div>
+        <div className="topbar__title">Price data</div>
       </header>
 
       <div className="scroll">
@@ -48,9 +48,9 @@ export default function CoverageView({
           </div>
           <div className="cov-stat">
             <div className="cov-stat__n mono">{coverage.cardsAmbiguous.toLocaleString()}</div>
-            <div className="cov-stat__l">Ambiguous · multiple printings</div>
+            <div className="cov-stat__l">Several EU printings</div>
           </div>
-          <div className="cov-stat">
+          <div className={withoutEu ? 'cov-stat cov-stat--none' : 'cov-stat'}>
             <div className="cov-stat__n mono">{withoutEu.toLocaleString()}</div>
             <div className="cov-stat__l">No European reference</div>
           </div>
@@ -59,18 +59,11 @@ export default function CoverageView({
         {missing.size > 0 ? (
           <div className="pad">
             <div className="banner banner--warn">
-              <div className="banner__title">Sets with no verified European price</div>
-              {missing.size >= all.length ? (
-                <>
-                  <strong>No set in this build has one.</strong> Every card here is judged on the Japanese market
-                  alone.
-                </>
-              ) : (
-                <>{[...missing].sort().join(', ')}</>
-              )}{' '}
-              Cardmarket has no confirmed Japanese expansion for {missing.size >= all.length ? 'any of them' : 'these'},
-              so the app shows no euro figure at all. Those cards are <strong>not</strong> worthless; judge them on the
-              Yuyu-tei sell and buyback prices.
+              <div className="banner__title">
+                {missing.size >= all.length ? 'No set has a verified European price' : `No European price for ${[...missing].sort().join(', ')}`}
+              </div>
+              Cardmarket has no confirmed Japanese expansion for {missing.size >= all.length ? 'any of them' : 'these'}.
+              Those cards are <strong>not</strong> worthless: judge them on the Yuyu-tei prices.
             </div>
           </div>
         ) : null}
@@ -78,14 +71,13 @@ export default function CoverageView({
         {coverage.cardsWithEu === 0 && coverage.cardsTotal > 0 ? (
           <div className="pad" style={{ paddingTop: 0 }}>
             <div className="banner banner--info">
-              <div className="banner__title">Why every card says &ldquo;no European price&rdquo;</div>
-              No Cardmarket data is baked into this build at all, so there is nothing to compare against in euros. The
-              yen prices are real and complete; only the European half is missing.
+              <div className="banner__title">No Cardmarket data in this build</div>
+              The yen prices are real and complete; only the European half is missing.
             </div>
           </div>
         ) : null}
 
-        <div className="section-label">Sets Yuyu-tei is selling</div>
+        <div className="section-label">Sets</div>
         {all.length ? (
           <ul className="setlist">
             {all.map((s) => (
@@ -99,19 +91,12 @@ export default function CoverageView({
           <div className="empty">No set list in this build.</div>
         )}
 
-        <div className="section-label">Build</div>
         <div className="foot">
-          Index generated: {when(generatedAt)}
+          Built {when(generatedAt)}. Rate{' '}
+          {fx.jpyPerEur > 0 ? `€1 = ¥${Math.round(fx.jpyPerEur)}` : 'not baked in'}
+          {fx.date ? ` on ${fx.date}` : ''} ({fx.source || 'unknown source'}).
           <br />
-          FX: {fx.jpyPerEur > 0 ? `€1 = ¥${Math.round(fx.jpyPerEur)}` : 'no rate baked in'} · {fx.source || 'unknown'}
-          {fx.date ? ` · ${fx.date}` : ''}
-          <br />
-          Every price here was baked at build time. Nothing is fetched while you are in a shop, so all of it works with
-          the phone in aeroplane mode.
-          <br />
-          <br />
-          Refresh with <code>pnpm pipeline</code>. Set-language corrections go in{' '}
-          <code>data/expansion-overrides.json</code>; the app honours whatever that file says.
+          Every price is inside the app, so it all works in aeroplane mode.
         </div>
       </div>
     </>

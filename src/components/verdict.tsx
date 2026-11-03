@@ -33,11 +33,11 @@ export interface NoVerdict {
 export type VerdictResult = Verdict | NoVerdict
 
 const BANDS: Array<{ max: number; band: Band; label: string; glyph: string }> = [
-  { max: 0.7, band: 'steal', label: 'STEAL', glyph: '▼▼' },
-  { max: 0.92, band: 'good', label: 'GOOD PRICE', glyph: '▼' },
-  { max: 1.08, band: 'fair', label: 'FAIR / MARKET', glyph: '●' },
-  { max: 1.35, band: 'high', label: 'HIGH', glyph: '▲' },
-  { max: Infinity, band: 'over', label: 'OVERPRICED', glyph: '▲▲' },
+  { max: 0.7, band: 'steal', label: 'Steal', glyph: '▼▼' },
+  { max: 0.92, band: 'good', label: 'Good price', glyph: '▼' },
+  { max: 1.08, band: 'fair', label: 'Market price', glyph: '●' },
+  { max: 1.35, band: 'high', label: 'High', glyph: '▲' },
+  { max: Infinity, band: 'over', label: 'Overpriced', glyph: '▲▲' },
 ]
 
 export function judge(card: Card, ask: number): VerdictResult {

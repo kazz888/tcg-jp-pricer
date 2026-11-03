@@ -1,39 +1,52 @@
 // One card, one asking price, one verdict.
 //
-// Reading order is deliberate: what the Japanese market does (Yuyu-tei) ->
-// what the shop wants -> the verdict -> Europe last and visibly subordinate.
+// Reading order is deliberate: the card itself, big enough to match against
+// the one in your hand -> what the Japanese market does (Yuyu-tei) -> Europe,
+// smaller and visibly subordinate. The shop's price and the verdict live in the
+// dock at the bottom, so the answer is always above your thumb.
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Card, Fx } from '../lib/types'
 import { Stepper } from './CollectionView'
 import EuPanel from './EuPanel'
-import Keypad from './Keypad'
-import { hasArt, hasRarity, pct, setOf, signedYen, yen } from './model'
+import { AskDock } from './Keypad'
+import { baseName, bigArt, eur, eurToJpy, hasArt, hasRarity, signedYen, yen } from './model'
 import { judge, parseAsk } from './verdict'
 
-const BAND_CLASS: Record<string, string> = {
-  steal: 'verdict verdict--steal',
-  good: 'verdict verdict--good',
-  fair: 'verdict verdict--fair',
-  high: 'verdict verdict--high',
-  over: 'verdict verdict--over',
-}
-
-function euTag(card: Card) {
-  switch (card.euStatus) {
-    case 'ok':
-      return card.eu.length > 1
-        ? { cls: 'tag tag--ambiguous', text: `EU: ${card.eu.length} printings` }
-        : { cls: 'tag tag--ok', text: 'EU: 1 printing' }
-    case 'ambiguous':
-      return { cls: 'tag tag--ambiguous', text: `EU: ${card.eu.length} printings` }
-    case 'unmapped_set':
-      return { cls: 'tag tag--none', text: 'EU: set unmapped' }
-    case 'no_match':
-      return { cls: 'tag tag--none', text: 'EU: no listing' }
-    default:
-      return { cls: 'tag tag--none', text: 'EU: not fetched' }
+/** Europe in one line, for the facts beside the card. Never a 0 or a dash. */
+function EuFact({ card, fx }: { card: Card; fx: Fx }) {
+  const only = card.eu.length === 1 && card.euStatus === 'ok' ? card.eu[0] : null
+  if (only && only.trendEur !== null && only.trendEur > 0) {
+    const jpy = eurToJpy(only.trendEur, fx)
+    return (
+      <dd className="mono">
+        {eur(only.trendEur)}
+        {jpy !== null ? <span className="facts__sub">≈ {yen(jpy)}</span> : null}
+      </dd>
+    )
   }
+  if (card.eu.length > 1) {
+    return (
+      <dd>
+        <button
+          type="button"
+          className="facts__more"
+          onClick={() => document.getElementById('eu')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+        >
+          {card.eu.length} printings
+        </button>
+      </dd>
+    )
+  }
+  const words =
+    card.euStatus === 'unmapped_set'
+      ? 'Not verified'
+      : card.euStatus === 'no_match'
+        ? 'No listing'
+        : card.euStatus === 'not_pulled'
+          ? 'Not fetched'
+          : 'No trend price'
+  return <dd className="facts__none">{words}</dd>
 }
 
 export default function CardView({
@@ -61,29 +74,14 @@ export default function CardView({
   onBack: () => void
 }) {
   const [ask, setAsk] = useState('')
-  const [padOpen, setPadOpen] = useState(true)
-  const inputRef = useRef<HTMLInputElement>(null)
-  const verdictRef = useRef<HTMLDivElement>(null)
 
   // A new card must never inherit the previous card's asking price.
   useEffect(() => {
     setAsk('')
   }, [card.cardId, card.code])
 
-  // The verdict is the point of the screen: never let the docked keypad push
-  // it below the fold once the user starts typing.
-  useEffect(() => {
-    if (ask.length === 1) verdictRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-  }, [ask])
-
-  const askJpy = parseAsk(ask)
-  const v = judge(card, askJpy)
-  const set = setOf(card.code)
-  const tag = euTag(card)
-
-  const pushDigits = (d: string) => setAsk((prev) => (prev + d).replace(/^0+(?=\d)/, '').slice(0, 9))
-  const backspace = () => setAsk((prev) => prev.slice(0, -1))
-  const clear = () => setAsk('')
+  const v = judge(card, parseAsk(ask))
+  const hasBuy = card.jpyBuy !== null && card.jpyBuy > 0
 
   return (
     <>
@@ -91,7 +89,7 @@ export default function CardView({
         <button type="button" className="btn btn--ghost btn--icon" onClick={onBack} aria-label="Back to search">
           ←
         </button>
-        <div className="topbar__title">{card.code}</div>
+        <div className="topbar__title mono">{card.code}</div>
         {/* Bookmarks THIS printing, not the code. A code can be five physical
             cards 318x apart in price, so "save OP09-119" would be meaningless -
             the strip below is where you pick which one. */}
@@ -107,39 +105,65 @@ export default function CardView({
       </header>
 
       <div className="scroll">
-        {hasArt(card.img) ? (
-          <img
-            className="card-art"
-            src={card.img}
-            alt={`Card art for ${card.code}`}
-            loading="lazy"
-            decoding="async"
-            width={132}
-            height={184}
-          />
-        ) : null}
-        <div className="card-head">
-          <div className="card-head__code mono">{card.code}</div>
-          <div className="card-head__name">{card.name || 'No name in index'}</div>
-          <div className="card-head__tags">
-            {set ? <span className="tag">{set}</span> : null}
-            {hasRarity(card.rarity) ? <span className="tag">{card.rarity}</span> : null}
-            {card.variant ? <span className="tag tag--variant">{card.variant}</span> : null}
-            {!card.inStock ? <span className="tag tag--oos">Out of stock at Yuyu-tei</span> : null}
-            <span className={tag.cls}>{tag.text}</span>
-          </div>
-        </div>
+        <div className="hero">
+          {hasArt(card.img) ? (
+            <img
+              className="hero__art"
+              src={bigArt(card.img)}
+              alt={`Card art for ${card.code}`}
+              decoding="async"
+              width={200}
+              height={280}
+            />
+          ) : (
+            <div className="hero__art hero__art--none">No scan</div>
+          )}
 
-        <div className="own">
-          <span className="own__label">In your collection</span>
-          <Stepper qty={ownedQty} name={card.code} onQty={(q) => onOwnedQty(card, q)} />
+          <div className="hero__info">
+            <div className="hero__name">{card.name ? baseName(card.name) : 'No name in index'}</div>
+            <div className="hero__meta">
+              {hasRarity(card.rarity) ? <span>{card.rarity}</span> : null}
+              {card.variant ? <span className="row__variant">{card.variant}</span> : null}
+              {!card.inStock ? <span className="row__oos">Sold out at Yuyu-tei</span> : null}
+            </div>
+
+            <div className="price-tag">
+              <span className="price-tag__label">Yuyu-tei</span>
+              {card.jpySell > 0 ? (
+                <span className={card.jpySell >= 1_000_000 ? 'price-tag__value price-tag__value--long mono' : 'price-tag__value mono'}>
+                  {yen(card.jpySell)}
+                </span>
+              ) : (
+                <span className="price-tag__none">No price listed</span>
+              )}
+            </div>
+
+            <dl className="facts">
+              <div className="facts__row">
+                <dt>Buyback</dt>
+                {hasBuy ? (
+                  <dd className="mono">
+                    {yen(card.jpyBuy!)}
+                    {card.jpyBuyPrev !== null && card.jpyBuyPrev !== card.jpyBuy ? (
+                      <span className="facts__sub">was {yen(card.jpyBuyPrev)}</span>
+                    ) : null}
+                  </dd>
+                ) : (
+                  <dd className="facts__none">Not bought</dd>
+                )}
+              </div>
+              <div className="facts__row">
+                <dt>Europe</dt>
+                <EuFact card={card} fx={fx} />
+              </div>
+            </dl>
+          </div>
         </div>
 
         {siblings.length > 1 ? (
           <section className="printings" aria-label={`All printings of ${card.code}`}>
             <div className="printings__head">
-              <strong>{siblings.length} printings share {card.code}</strong>
-              <span>Tap the one you are holding — the art is the only reliable tell.</span>
+              {siblings.length} printings. Tap the one you are holding.
             </div>
             <ul className="printings__strip">
               {siblings.map((s) => {
@@ -159,21 +183,19 @@ export default function CardView({
                           alt={`${s.rarity} ${s.variant ?? 'base'} printing`}
                           loading="lazy"
                           decoding="async"
-                          width={72}
-                          height={100}
+                          width={80}
+                          height={112}
                         />
                       ) : (
                         <span className="printing__art printing__art--none" aria-hidden="true">
-                          no scan
+                          No scan
                         </span>
                       )}
                       <span className="printing__price mono">{yen(s.jpySell)}</span>
                       <span className="printing__meta">
-                        {hasRarity(s.rarity) ? s.rarity : '—'}
-                        {s.variant ? ` · ${s.variant}` : ''}
+                        {hasRarity(s.rarity) ? s.rarity : ''} {s.variant ?? ''}
                       </span>
-                      {isCurrent ? <span className="printing__flag">this one</span> : null}
-                      {!s.inStock ? <span className="printing__oos">OOS</span> : null}
+                      {!s.inStock ? <span className="printing__oos">Sold out</span> : null}
                     </button>
                   </li>
                 )
@@ -182,137 +204,45 @@ export default function CardView({
           </section>
         ) : null}
 
-        <section className="ask" aria-label="Shop asking price">
-          <div className="ask__label">Shop is asking</div>
-          <div className="ask__field">
-            <span className="ask__yen" aria-hidden="true">¥</span>
-            <input
-              ref={inputRef}
-              className="ask__input"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              type="text"
-              autoComplete="off"
-              enterKeyHint="done"
-              placeholder="0"
-              aria-label="Shop asking price in yen"
-              value={ask}
-              onChange={(e) => setAsk(e.target.value.replace(/\D/g, '').replace(/^0+(?=\d)/, '').slice(0, 9))}
-            />
-            {ask ? (
-              <button type="button" className="ask__clear" onClick={clear} aria-label="Clear asking price">
-                ×
-              </button>
-            ) : null}
-          </div>
-        </section>
-
-        {v.kind === 'no-reference' ? (
-          <div className="verdict verdict--idle" role="status" ref={verdictRef}>
-            <div className="verdict__headline">
-              <span className="verdict__glyph" aria-hidden="true">?</span>
-              <span>No verdict yet</span>
-            </div>
-            {card.jpySell > 0 ? (
-              <div className="verdict__delta mono">
-                Yuyu-tei {yen(card.jpySell)}
-                {card.jpyBuy !== null && card.jpyBuy > 0 ? ` \u00b7 floor ${yen(card.jpyBuy)}` : ''}
-              </div>
-            ) : null}
-            <div className="verdict__explain">{v.reason}</div>
-          </div>
-        ) : (
-          <div className={BAND_CLASS[v.band]} role="status" aria-live="polite" ref={verdictRef}>
-            <div className="verdict__headline">
-              <span className="verdict__glyph" aria-hidden="true">{v.glyph}</span>
-              <span>{v.label}</span>
-            </div>
-            <div className="verdict__delta mono">
-              {yen(v.ask)} vs {yen(v.sell)} · {pct(v.ratio)} · {signedYen(v.deltaJpy)}
-            </div>
-            <div className="verdict__explain">
-              {v.explain} Yuyu-tei is the Japanese market reference, not a European one.
-            </div>
-            {!v.underFloor && card.jpyBuy !== null && card.jpyBuy > 0 ? (
-              <div className="verdict__floor">
-                Yuyu-tei buyback floor: {yen(card.jpyBuy)} &mdash; what a dealer pays you in cash.
-              </div>
-            ) : null}
-            {v.underFloor ? (
-              <div className="verdict__floor">
-                ▼ Below Yuyu-tei&rsquo;s own buyback ({yen(card.jpyBuy ?? 0)}). They would pay you more than this shop
-                is charging.
-              </div>
-            ) : null}
-          </div>
-        )}
-
-        <section className="panel" aria-label="Yuyu-tei prices">
-          <div className="panel__label">Yuyu-tei · Japanese market</div>
-          <div className="jp-prices">
-            <div>
-              <div className="jp-price__label">Sell price</div>
-              {card.jpySell > 0 ? (
-                <div className="jp-price__value mono">{yen(card.jpySell)}</div>
-              ) : (
-                <div className="jp-price__value--none">No sell price listed</div>
-              )}
-              <div className="jp-price__note">What a shop in Japan asks</div>
-            </div>
-            <div>
-              <div className="jp-price__label">Buyback · floor</div>
-              {card.jpyBuy !== null && card.jpyBuy > 0 ? (
-                <div className="jp-price__value jp-price__value--floor mono">{yen(card.jpyBuy)}</div>
-              ) : (
-                <div className="jp-price__value--none">Not bought back</div>
-              )}
-              <div className="jp-price__note">
-                {card.jpyBuy !== null && card.jpyBuy > 0
-                  ? 'Cash Yuyu-tei pays you — realistic floor'
-                  : 'No floor signal for this card'}
-              </div>
-            </div>
-          </div>
-          {card.jpyBuyPrev !== null && card.jpyBuy !== null && card.jpyBuyPrev !== card.jpyBuy ? (
-            <div className="jp-price__note" style={{ marginTop: 10 }}>
-              Buyback recently moved from {yen(card.jpyBuyPrev)} to {yen(card.jpyBuy)}.
-            </div>
-          ) : null}
-          {!card.inStock ? (
-            <div className="jp-price__note" style={{ marginTop: 10 }}>
-              Yuyu-tei is sold out, so the sell price is their last listed price — treat it as softer than usual.
-            </div>
-          ) : null}
-        </section>
-
         <EuPanel card={card} fx={fx} />
 
+        <div className="own">
+          <span className="own__label">In my collection</span>
+          <Stepper qty={ownedQty} name={card.code} onQty={(q) => onOwnedQty(card, q)} />
+        </div>
+
         <div className="foot">
-          Yuyu-tei stock: {card.inStock ? `${card.stock} listed` : 'none'} · bucket{' '}
-          <code>{card.setBucket || 'unknown'}</code>
+          {card.inStock ? `${card.stock} in stock at Yuyu-tei.` : 'The Yuyu-tei price is its last listing, so treat it as softer.'}
           {card.detailUrl ? (
             <>
-              <br />
-              <a href={card.detailUrl} rel="noreferrer noopener" target="_blank" style={{ color: 'var(--blue)' }}>
-                Yuyu-tei page
-              </a>{' '}
-              (needs signal)
+              {' '}
+              <a href={card.detailUrl} rel="noreferrer noopener" target="_blank">
+                Open on Yuyu-tei
+              </a>
             </>
           ) : null}
         </div>
       </div>
 
-      <div className="keypad-dock">
-        <div className="keypad-dock__bar">
-          <span>Asking price · yen</span>
-          <button type="button" className="keypad-dock__toggle" onClick={() => setPadOpen((p) => !p)}>
-            {padOpen ? 'Hide pad' : 'Show pad'}
-          </button>
+      <AskDock ask={ask} onAsk={setAsk}>
+        <div className={v.kind === 'judged' ? `verdict verdict--${v.band}` : 'verdict verdict--idle'} role="status" aria-live="polite">
+          {v.kind === 'judged' ? (
+            <>
+              <span className="verdict__glyph" aria-hidden="true">
+                {v.glyph}
+              </span>
+              <span className="verdict__label">{v.label}</span>
+              <span className="verdict__amount mono">{signedYen(v.deltaJpy)}</span>
+              <span className="verdict__delta">{v.explain}</span>
+              {v.underFloor ? (
+                <span className="verdict__floor">Below Yuyu-tei&rsquo;s buyback of {yen(card.jpyBuy ?? 0)}</span>
+              ) : null}
+            </>
+          ) : (
+            <span className="verdict__idle">{v.reason}</span>
+          )}
         </div>
-        {padOpen ? (
-          <Keypad onDigits={pushDigits} onBackspace={backspace} onClear={clear} />
-        ) : null}
-      </div>
+      </AskDock>
     </>
   )
 }

@@ -8,6 +8,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { searchCards, type Game, type Owned, type Searchable } from './collection'
 import { foldRomaji, kanaToRomaji } from './matching'
+import { bigArt } from './model'
 
 const GAMES: { game: Game; label: string }[] = [
   { game: 'pokemon', label: 'Pokémon' },
@@ -94,7 +95,7 @@ function PokemonSearch({ items, onQty }: { items: readonly Owned[]; onQty: (item
             ? 'The Pokémon card list did not load. It needs signal the first time.'
             : !cards
               ? 'Loading the Pokémon card list…'
-              : 'Type the set and number printed bottom-left of the card. Japanese names and rough romaji also match. Tap a card to add one.'}
+              : 'Set and number from the bottom-left of the card, or the name. Tap a card to add it.'}
         </div>
       </div>
       <ul className="results">
@@ -106,19 +107,25 @@ function PokemonSearch({ items, onQty }: { items: readonly Owned[]; onQty: (item
             <li key={c.id}>
               <button
                 type="button"
-                className={c.img ? 'row row--thumb' : 'row'}
+                className="row"
                 onClick={() => onQty(item, qty + 1)}
                 aria-label={`Add ${c.name} ${c.set} ${c.code}${qty ? `, you have ${qty}` : ''}`}
               >
                 {c.img ? (
-                  <img className="row__thumb" src={c.img} alt="" aria-hidden="true" loading="lazy" decoding="async" width={56} height={78} />
-                ) : null}
-                <span className="row__code mono">
-                  {c.set} {c.code}
+                  <img className="row__thumb" src={c.img} alt="" aria-hidden="true" loading="lazy" decoding="async" width={52} height={73} />
+                ) : (
+                  <span className="row__thumb row__thumb--none" aria-hidden="true" />
+                )}
+                <span className="row__main">
+                  <span className="row__code mono">
+                    {c.set} {c.code}
+                  </span>
+                  <span className="row__name">{c.name}</span>
+                  <span className="row__meta">{c.rarity ? <span>{c.rarity}</span> : null}</span>
                 </span>
-                <span className="row__price mono">{qty ? `×${qty}` : '+'}</span>
-                <span className="row__name">{c.name}</span>
-                <span className="row__meta">{c.rarity ? <span className="tag">{c.rarity}</span> : null}</span>
+                <span className="row__side">
+                  <span className="row__price mono">{qty ? `×${qty}` : '+'}</span>
+                </span>
               </button>
             </li>
           )
@@ -184,7 +191,7 @@ function AddForm({ onAdd }: { onAdd: (item: Owned) => boolean }) {
         {busy ? 'Saving…' : 'Add card'}
       </button>
       <div className="foot" style={{ margin: 0 }}>
-        One Piece cards from the price index are quicker: open the card and tap + there.
+        One Piece cards are quicker: open the card and tap + there.
       </div>
     </form>
   )
@@ -209,7 +216,7 @@ export default function CollectionView({
         <button type="button" className="btn btn--ghost btn--icon" onClick={onBack} aria-label="Back to search">
           ←
         </button>
-        <div className="topbar__title">Collection</div>
+        <div className="topbar__title">My collection</div>
         <button type="button" className="btn btn--ghost btn--icon" onClick={() => setAdding((a) => !a)} aria-expanded={adding}>
           {adding ? 'Done' : '+ Add'}
         </button>
@@ -229,26 +236,25 @@ export default function CollectionView({
         {items.length === 0 ? (
           <div className="empty">
             <strong>No cards yet</strong>
-            Search for a Pokémon card above, or open any One Piece card and tap +.
+            Search for a Pokémon card above, or open a One Piece card and tap +.
           </div>
         ) : (
           <>
-            <div className="foot">
-              {items.length} cards · {copies} copies · saved on this device only
+            <div className="section-label mono">
+              {items.length} cards, {copies} copies
             </div>
             {GAMES.map(({ game, label }) => {
               const list = items.filter((x) => x.game === game)
               return list.length ? (
                 <section key={game} aria-label={label}>
-                  <div className="section-label">
-                    {label} · {list.length}
+                  <div className="section-label mono">
+                    {label} ({list.length})
                   </div>
                   <ul className="own-grid">
                     {list.map((x) => (
                       <li key={x.id} className="own-tile">
                         {x.img ? (
-                          // Yuyu-tei's 100x140 thumbnails blur at tile size; 200x280 exists for every card.
-                          <img className="own-tile__art" src={x.img.replace('/100_140/', '/200_280/')} alt={x.name} loading="lazy" decoding="async" />
+                          <img className="own-tile__art" src={bigArt(x.img)} alt={x.name} loading="lazy" decoding="async" />
                         ) : (
                           <span className="own-tile__art" aria-hidden="true">
                             no picture

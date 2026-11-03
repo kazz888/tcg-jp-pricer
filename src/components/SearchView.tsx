@@ -1,21 +1,12 @@
 // Search screen. The default and fastest path is the card code the user is
 // literally reading off the card in his hand, so the field is code-shaped:
-// monospace, uppercase, wide letter spacing, no autocorrect, no autocapitalise
-// surprises. Filtering is synchronous over the whole baked index.
+// uppercase, no autocorrect, no autocapitalise surprises. Filtering is
+// synchronous over the whole baked index.
 
 import { useEffect, useMemo, useRef } from 'react'
 import type { Card, Coverage } from '../lib/types'
 import { search, type SearchEntry } from './matching'
-import { baseName, hasArt, hasRarity, setOf, yen } from './model'
-import type { SyncStatus } from './sync'
-
-const BACKUP_LABEL: Record<SyncStatus, string> = {
-  off: 'Backup off',
-  saving: 'Saving…',
-  saved: 'Backed up',
-  failed: 'Not saved',
-  'bad-key': 'Wrong key',
-}
+import { baseName, eur, hasArt, hasRarity, setOf, yen } from './model'
 
 // Set codes hidden from the filter row at the top of the search screen.
 // ST = starter decks: 28 chips for products whose singles are rarely bought
@@ -33,53 +24,59 @@ function isHiddenSet(setCode: string): boolean {
   return HIDDEN_SET_PREFIXES.includes(prefix)
 }
 
-function euBadge(card: Card) {
-  switch (card.euStatus) {
-    case 'ok':
-      return card.eu.length > 1
-        ? { cls: 'tag tag--ambiguous', text: `EU ${card.eu.length}×` }
-        : { cls: 'tag tag--ok', text: 'EU ✓' }
-    case 'ambiguous':
-      return { cls: 'tag tag--ambiguous', text: `EU ${card.eu.length}×` }
-    case 'unmapped_set':
-      return { cls: 'tag tag--none', text: 'EU unmapped' }
-    case 'no_match':
-      return { cls: 'tag tag--none', text: 'EU none' }
-    default:
-      return { cls: 'tag tag--none', text: 'EU n/a' }
-  }
+/**
+ * Europe under the yen price. Several printings are listed side by side in
+ * gold, never averaged; past three they no longer fit a row, so the row shows
+ * the spread and the count, and the card screen lists every one.
+ */
+function euShort(card: Card): { cls: string; text: string; priced: boolean } {
+  const prices = card.eu
+    .map((c) => c.trendEur)
+    .filter((t): t is number => t !== null && t > 0)
+    .sort((a, b) => a - b)
+  if (prices.length === 0) return { cls: 'row__eu row__eu--none', text: 'No EU price', priced: false }
+  if (card.euStatus === 'ok' && card.eu.length === 1) return { cls: 'row__eu', text: eur(prices[0]!), priced: true }
+  const text =
+    prices.length <= 3
+      ? prices.map(eur).join(' / ')
+      : `${eur(prices[0]!)} – ${eur(prices[prices.length - 1]!)} (${prices.length})`
+  return { cls: 'row__eu row__eu--warn', text, priced: true }
 }
 
-function Row({ card, onPick, showThumb }: { card: Card; onPick: (c: Card) => void; showThumb?: boolean }) {
-  const badge = euBadge(card)
-  const withThumb = Boolean(showThumb && hasArt(card.img))
+function Row({ card, onPick }: { card: Card; onPick: (c: Card) => void }) {
+  const eu = euShort(card)
   return (
     <li>
-      <button
-        type="button"
-        className={withThumb ? 'row row--thumb' : 'row'}
-        onClick={() => onPick(card)}
-      >
-        {withThumb ? (
-          <img
-            className="row__thumb"
-            src={card.img}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            width={56}
-            height={78}
-          />
-        ) : null}
-        <span className="row__code mono">{card.code}</span>
-        <span className="row__price mono">{card.jpySell > 0 ? yen(card.jpySell) : 'no price'}</span>
-        <span className="row__name">{card.name ? baseName(card.name) : 'no name'}</span>
-        <span className="row__meta">
-          {card.variant ? <span className="tag tag--variant">{card.variant}</span> : null}
-          {hasRarity(card.rarity) ? <span className="tag">{card.rarity}</span> : null}
-          {!card.inStock ? <span className="tag tag--oos">OOS</span> : null}
-          <span className={badge.cls}>{badge.text}</span>
+      <button type="button" className="row" onClick={() => onPick(card)}>
+        {/* Every row carries the art: a code is several printings, and the text
+            is identical between a 780 yen base card and a 248,000 yen one. */}
+        {hasArt(card.img) ? (
+          <img className="row__thumb" src={card.img} alt="" aria-hidden="true" loading="lazy" decoding="async" width={52} height={73} />
+        ) : (
+          <span className="row__thumb row__thumb--none" aria-hidden="true" />
+        )}
+        <span className="row__main">
+          <span className="row__code mono">{card.code}</span>
+          <span className="row__name">{card.name ? baseName(card.name) : 'no name'}</span>
+          <span className="row__meta">
+            {hasRarity(card.rarity) ? <span>{card.rarity}</span> : null}
+            {card.variant ? <span className="row__variant">{card.variant}</span> : null}
+            {!card.inStock ? <span className="row__oos">Yuyu-tei sold out</span> : null}
+          </span>
+        </span>
+        <span className="row__side">
+          <span className="row__price mono">{card.jpySell > 0 ? yen(card.jpySell) : 'No price'}</span>
+          <span className={`${eu.cls} mono`}>
+            {eu.priced ? (
+              <>
+                <span className="row__src" aria-hidden="true">
+                  CM
+                </span>
+                <span className="sr-only">Cardmarket </span>
+              </>
+            ) : null}
+            {eu.text}
+          </span>
         </span>
       </button>
     </li>
@@ -95,9 +92,8 @@ export default function SearchView({
   setSetFilter,
   recent,
   onPick,
-  onOpenCoverage,
-  backupStatus,
-  onBackup,
+  onOpenMenu,
+  menuAlert,
 }: {
   entries: SearchEntry[]
   coverage: Coverage
@@ -107,9 +103,9 @@ export default function SearchView({
   setSetFilter: (s: string | null) => void
   recent: Card[]
   onPick: (c: Card) => void
-  onOpenCoverage: () => void
-  backupStatus: SyncStatus
-  onBackup: () => void
+  onOpenMenu: () => void
+  /** Something in the menu needs you (the backup is failing). */
+  menuAlert: boolean
 }) {
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -119,22 +115,6 @@ export default function SearchView({
 
   const result = useMemo(() => search(entries, query, setFilter), [entries, query, setFilter])
   const missing = useMemo(() => new Set(coverage.missingSets), [coverage.missingSets])
-
-  // A card code is not unique: OP09-119 ships as base, parallel, super-parallel
-  // and more, 318x apart in price. When a code has several printings the text
-  // alone cannot tell them apart, so those rows get the art to match against
-  // the card actually in your hand.
-  const dupeCodes = useMemo(() => {
-    const seen = new Map<string, number>()
-    for (const e of entries) {
-      const code = e.card.code
-      if (!code || code === '-') continue
-      seen.set(code, (seen.get(code) ?? 0) + 1)
-    }
-    const dupes = new Set<string>()
-    for (const [code, n] of seen) if (n > 1) dupes.add(code)
-    return dupes
-  }, [entries])
 
   const sets = useMemo(() => {
     const fromCoverage = coverage.yuyuteiSets.length
@@ -148,17 +128,17 @@ export default function SearchView({
   return (
     <>
       <header className="topbar">
-        <div className="topbar__title">One Piece · price check</div>
-        <button
-          type="button"
-          className={backupStatus === 'saved' ? 'btn btn--ghost btn--icon' : 'btn btn--ghost btn--icon backup--warn'}
-          onClick={onBackup}
-          aria-label={`Backup: ${BACKUP_LABEL[backupStatus]}. Tap to set the backup key.`}
-        >
-          {BACKUP_LABEL[backupStatus]}
-        </button>
-        <button type="button" className="btn btn--ghost btn--icon" onClick={onOpenCoverage}>
-          Coverage
+        <div className="topbar__title">Price check</div>
+        <button type="button" className="btn btn--ghost menu-btn" onClick={onOpenMenu} aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          Menu
+          {menuAlert ? (
+            <span className="menu-btn__dot">
+              <span className="sr-only">, backup needs attention</span>
+            </span>
+          ) : null}
         </button>
       </header>
 
@@ -185,10 +165,11 @@ export default function SearchView({
               </button>
             ) : null}
           </div>
-          <div className="searchbar__hint">
-            Type the code off the card. Digits alone work too — <span className="mono">09119</span> finds{' '}
-            <span className="mono">OP09-119</span>. Japanese names and rough romaji also match.
-          </div>
+          {!query ? (
+            <div className="searchbar__hint">
+              Card code, just the digits (<span className="mono">09119</span>), or the name
+            </div>
+          ) : null}
         </div>
 
         {sets.length ? (
@@ -218,39 +199,37 @@ export default function SearchView({
 
         {showRecent ? (
           <>
-            <div className="section-label">Recently checked</div>
+            <div className="section-label">Recent</div>
             <ul className="results">
               {recent.map((c) => (
-                <Row key={`recent-${c.setBucket}-${c.cardId}-${c.code}`} card={c} onPick={onPick} showThumb={dupeCodes.has(c.code)} />
+                <Row key={`recent-${c.setBucket}-${c.cardId}-${c.code}`} card={c} onPick={onPick} />
               ))}
             </ul>
           </>
         ) : null}
 
-        <div className="section-label">
+        <div className="section-label mono">
           {query || setFilter
-            ? `${result.total} match${result.total === 1 ? '' : 'es'}`
-            : `All cards · ${entries.length}`}
-          {result.truncated ? ` · showing first ${result.entries.length}` : ''}
+            ? `${result.total.toLocaleString()} ${result.total === 1 ? 'match' : 'matches'}`
+            : `${entries.length.toLocaleString()} cards`}
+          {result.truncated ? `, first ${result.entries.length} shown` : ''}
         </div>
 
         {result.entries.length === 0 ? (
           <div className="empty">
             <strong>Nothing matches “{query}”</strong>
-            Check the code on the card, or try only the digits. Cards Yuyu-tei does not stock are not in this index at
-            all — that is not a price of zero. Starter-deck (ST) singles are excluded on purpose.
+            Check the code on the card, or type only the digits. Cards Yuyu-tei does not sell are not listed, which is
+            not the same as worthless.
           </div>
         ) : (
           <ul className="results">
             {result.entries.map((e) => (
-              <Row key={`${e.card.setBucket}-${e.card.cardId}-${e.i}`} card={e.card} onPick={onPick} showThumb={dupeCodes.has(e.card.code)} />
+              <Row key={`${e.card.setBucket}-${e.card.cardId}-${e.i}`} card={e.card} onPick={onPick} />
             ))}
           </ul>
         )}
 
-        {result.truncated ? (
-          <div className="foot">Keep typing to narrow this down — only the first {result.entries.length} are drawn.</div>
-        ) : null}
+        {result.truncated ? <div className="foot">Keep typing to narrow this down.</div> : null}
       </div>
     </>
   )

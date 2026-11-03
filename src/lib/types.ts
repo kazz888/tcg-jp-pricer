@@ -199,7 +199,7 @@ export type SealedKind = 'booster_box' | 'booster_pack'
  *
  * A Europe-relative verdict band IS therefore permitted and is the intended
  * design - but the European frame must live in the band's LOUDEST text, not
- * only in the small print beside it. "WELL UNDER EU" is honest; a bare "STEAL"
+ * only in the small print beside it. "Well under Europe" is honest; a bare "Steal"
  * overclaims, because nothing here knows the Japanese market price.
  * The agreed thresholds, as a fraction of the European trend price, are
  * 0.35 / 0.55 / 0.75 / 1.0.

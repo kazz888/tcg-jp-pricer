@@ -11,70 +11,42 @@
 import type { Card, EuCandidate, Fx } from '../lib/types'
 import { eur, eurToJpy, setOf, yen } from './model'
 
-function Money({ label, value, fx }: { label: string; value: number | null; fx: Fx }) {
+function Money({ label, value }: { label: string; value: number | null }) {
   if (value === null || value <= 0) {
     return (
-      <div className="cand__price cand__price--na">
+      <span className="cand__price cand__price--na">
         {label}
         <b>not listed</b>
-      </div>
+      </span>
     )
   }
-  const jpy = eurToJpy(value, fx)
   return (
-    <div className="cand__price">
+    <span className="cand__price">
       {label}
       <b>{eur(value)}</b>
-      {jpy !== null ? <span className="sr-only">{` (about ${yen(jpy)})`}</span> : null}
-    </div>
+    </span>
   )
 }
 
 function Candidate({ c, fx }: { c: EuCandidate; fx: Fx }) {
-  const jpy = c.trendEur !== null ? eurToJpy(c.trendEur, fx) : null
+  const jpy = c.trendEur !== null && c.trendEur > 0 ? eurToJpy(c.trendEur, fx) : null
   return (
-    <li>
-      <div className="cand">
-        <div className="cand__exp">{c.expansionName}</div>
-        {c.name ? <div className="cand__name">{c.name}</div> : null}
-        <div className="cand__prices">
-          <Money label="Trend" value={c.trendEur} fx={fx} />
-          <Money label="Low @ snapshot" value={c.lowEur} fx={fx} />
-          <Money label="7-day avg" value={c.avg7Eur} fx={fx} />
-        </div>
-        {jpy !== null ? (
-          <div className="cand__jpy">Trend ≈ {yen(jpy)} at the baked rate</div>
-        ) : null}
-        {/* Cardmarket publishes the price guide once a day. Trend is a computed
-            statistic and matches the site exactly; "From" on the live page is
-            the cheapest ACTIVE listing and drifts within the day as copies sell
-            or get undercut. Verified 2026-09-15 on OP09-119: trend 1854.76 to
-            the cent, while the live "From" had moved 1900 -> 1750. */}
-        <div className="cand__stale">
-          Low is from the daily guide, not live — Cardmarket’s “From” moves during the day.
-        </div>
-      </div>
+    <li className="cand">
+      <span className="cand__exp">{c.expansionName}</span>
+      {c.trendEur !== null && c.trendEur > 0 ? (
+        <span className="cand__trend">
+          {eur(c.trendEur)}
+          {jpy !== null ? <span className="cand__jpy">≈ {yen(jpy)}</span> : null}
+        </span>
+      ) : (
+        <span className="cand__trend cand__trend--na">No trend price</span>
+      )}
+      {c.name ? <span className="cand__name">{c.name}</span> : null}
+      <span className="cand__prices">
+        <Money label="Low" value={c.lowEur} />
+        <Money label="7-day" value={c.avg7Eur} />
+      </span>
     </li>
-  )
-}
-
-function Box({
-  tone,
-  status,
-  children,
-}: {
-  tone: 'ok' | 'warn' | 'none'
-  status: string
-  children: React.ReactNode
-}) {
-  const boxClass = tone === 'warn' ? 'eu__box eu__box--warn' : tone === 'none' ? 'eu__box eu__box--none' : 'eu__box'
-  const statusClass =
-    tone === 'warn' ? 'eu__status eu__status--ambiguous' : tone === 'none' ? 'eu__status eu__status--none' : 'eu__status eu__status--ok'
-  return (
-    <div className={boxClass}>
-      <span className={statusClass}>{status}</span>
-      {children}
-    </div>
   )
 }
 
@@ -94,101 +66,61 @@ export default function EuPanel({ card, fx }: { card: Card; fx: Fx }) {
 
   if (card.euStatus === 'unmapped_set') {
     body = (
-      <Box tone="none" status="No verified European price">
+      <>
+        <p className="eu__msg eu__msg--warn">No verified European price for {set ?? 'this set'}.</p>
         <p className="eu__msg">
-          <strong>
-            This set{set ? ` (${set})` : ''} is not mapped to a confirmed Japanese Cardmarket expansion.
-          </strong>{' '}
-          That is a gap in our data, <strong>not</strong> a statement about the card&rsquo;s value — the card may
-          well be valuable.
+          Cardmarket only lists it as &ldquo;Asia Region Legal&rdquo;, which is not confirmed Japanese. A gap in the
+          data, not in the card&rsquo;s value.
         </p>
-        <p className="eu__msg" style={{ marginTop: 8 }}>
-          Cardmarket lists this set only under &ldquo;Asia Region Legal&rdquo;, which has not been confirmed to mean
-          Japanese-language. Using it could show you a price for the wrong printing, so we show nothing. Judge on the
-          Yuyu-tei numbers above.
-        </p>
-      </Box>
+      </>
     )
   } else if (card.euStatus === 'no_match') {
     body = (
-      <Box tone="none" status="No European listing found">
-        <p className="eu__msg">
-          The set <strong>is</strong> mapped, but no Cardmarket row carries the code{' '}
-          <strong className="mono">{card.code}</strong>. No European reference for this card.
-        </p>
-      </Box>
+      <p className="eu__msg">
+        No Cardmarket listing carries <strong className="mono">{card.code}</strong>.
+      </p>
     )
   } else if (card.euStatus === 'not_pulled') {
-    body = (
-      <Box tone="none" status="European data not fetched">
-        <p className="eu__msg">
-          Cardmarket prices have not been pulled for this build. Nothing to compare against — this is a missing
-          fetch, not a missing value.
-        </p>
-      </Box>
-    )
+    body = <p className="eu__msg">Cardmarket prices are not in this build. A missing fetch, not a missing value.</p>
   } else if (candidates.length === 0) {
     // Status claims data but none arrived. Fail closed rather than render blanks.
-    body = (
-      <Box tone="none" status="No European candidates">
-        <p className="eu__msg">
-          The index reports status <strong className="mono">{card.euStatus}</strong> but contains no printings. Treat
-          this as no European reference.
-        </p>
-      </Box>
-    )
+    body = <p className="eu__msg">No European printings in the index for this card.</p>
   } else if (candidates.length === 1 && card.euStatus === 'ok') {
-    const c = candidates[0]!
-    const jpy = c.trendEur !== null ? eurToJpy(c.trendEur, fx) : null
     body = (
-      <Box tone="ok" status="One verified Japanese printing">
-        <div className="cand__exp">{c.expansionName}</div>
-        {c.trendEur !== null && c.trendEur > 0 ? (
-          <>
-            <div className="eu__single-value">{eur(c.trendEur)}</div>
-            <div className="eu__sub">
-              Cardmarket trend{jpy !== null ? ` · ≈ ${yen(jpy)}` : ''}
-            </div>
-          </>
-        ) : (
-          <p className="eu__msg" style={{ marginTop: 6 }}>
-            <strong>No trend price on Cardmarket for this printing.</strong>
-          </p>
-        )}
-        <ul className="cand-list">
-          <Candidate c={c} fx={fx} />
-        </ul>
-      </Box>
+      <ul className="cand-list">
+        <Candidate c={candidates[0]!} fx={fx} />
+      </ul>
     )
   } else {
     // Two or more printings share this code. NEVER collapse them.
     body = (
-      <Box tone="warn" status={`Ambiguous · ${candidates.length} printings`}>
-        <p className="eu__msg">
-          <strong>{candidates.length} different Cardmarket printings share the code {card.code}.</strong> Base, parallel
-          and alternate-art prints can differ 10x–50x, and the price rows carry no rarity field — so we cannot
-          tell which one you are holding.
-        </p>
-        <p className="eu__msg" style={{ marginTop: 8 }}>
-          <strong>You must decide which printing is in your hand.</strong> No average or &ldquo;best guess&rdquo; is
-          shown, because a wrong one would cost you real money.
+      <>
+        <p className="eu__msg eu__msg--warn">
+          {candidates.length} printings share {card.code} and can differ 10x to 50x. Match yours by name; nothing is
+          averaged.
         </p>
         <ul className="cand-list">
           {candidates.map((c) => (
             <Candidate key={`${c.productId}-${c.expansionId}`} c={c} fx={fx} />
           ))}
         </ul>
-      </Box>
+      </>
     )
   }
 
   return (
-    <section className="eu" aria-label="European price context">
+    <section className="eu" id="eu" aria-label="European price context">
       <div className="eu__head">
-        <h2 className="eu__title">Europe (secondary)</h2>
+        <h2 className="eu__title">Europe</h2>
         {fxNote ? <span className="eu__sub">{fxNote}</span> : null}
       </div>
       {body}
+      {/* Cardmarket publishes the price guide once a day. Trend is a computed
+          statistic and matches the site exactly; "From" on the live page is
+          the cheapest ACTIVE listing and drifts within the day as copies sell
+          or get undercut. Verified 2026-09-15 on OP09-119: trend 1854.76 to
+          the cent, while the live "From" had moved 1900 -> 1750. */}
+      {showsEuros ? <div className="cand__stale">Cardmarket trend. Low is from the daily guide, not live.</div> : null}
     </section>
   )
 }

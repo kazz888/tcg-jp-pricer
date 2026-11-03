@@ -298,6 +298,11 @@ export function hasArt(img: string | null | undefined): boolean {
   return Boolean(img) && !String(img).includes('noimage')
 }
 
+/** Yuyu-tei's 100x140 thumbnails blur at full-card size; 200x280 exists for every card. */
+export function bigArt(img: string): string {
+  return img.replace('/100_140/', '/200_280/')
+}
+
 // ------------------------------------------------------------------- sealed
 //
 // Sealed product (booster boxes and booster packs) is a second, much smaller
